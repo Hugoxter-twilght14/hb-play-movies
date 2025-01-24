@@ -4,7 +4,6 @@ import {redirect} from "next/navigation";
 import { db } from "@/lib/db";
 import { auth } from "@/auth";
 import { TrendingMovies } from "./(routes)/(home)/components/TrendingMovies";
-import { List } from "lucide-react";
 import { ListMovies } from "./(routes)/(home)/components/ListMovies";
 
 

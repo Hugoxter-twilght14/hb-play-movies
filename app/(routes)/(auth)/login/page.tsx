@@ -3,10 +3,8 @@ import React from 'react'
 import { Checkbox } from "@/components/ui/checkbox"
 import { Terms } from '../components/Terms';
 import { LoginForm } from './LoginForm';
-import { auth } from '@/auth';
 
 export default async function page() {
-    const session = await auth()
     
   return (
     <div>

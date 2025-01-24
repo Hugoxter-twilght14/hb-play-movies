@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ActionsButtonFilmProps } from "./ActionsButtonFilm.types";
 import { useRouter } from "next/navigation";
-import { ChevronDown, Icon, Play } from "lucide-react";
+import { ChevronDown, Play } from "lucide-react";
 
 export function ActionsButtonsFilm(props: ActionsButtonFilmProps) {
     const {idFilm} = props;

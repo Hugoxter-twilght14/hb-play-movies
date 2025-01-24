@@ -27,7 +27,7 @@ import {
 
 export function Profiles(props: ProfilesProps) {
   const {users} = props;
-  const {changeCurrentUser, currentUser} = useCurrentNetflixUser();
+  const {changeCurrentUser} = useCurrentNetflixUser();
 
   const [manageProfiles, setManageProfiles] = useState(false);
   const router = useRouter();
