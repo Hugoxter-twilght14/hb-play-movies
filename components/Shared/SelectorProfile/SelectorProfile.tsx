@@ -1,0 +1,66 @@
+"use client"
+import { SelectorProfileProps } from "./SelectorProfile.types";
+import { useRouter } from "next/navigation";
+import { useCurrentNetflixUser } from "@/hooks/use-current-user";
+import { UserNetflix } from "@prisma/client";
+import Image from "next/image";
+import { ChevronDown, LogOut, Pencil } from "lucide-react";
+import { signOut } from "next-auth/react";
+
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+  } from "@/components/ui/dropdown-menu";
+
+  
+  
+export function SelectorProfile(props: SelectorProfileProps) {
+    const {users} = props;
+    const router = useRouter();
+    const {changeCurrentUser, currentUser} = useCurrentNetflixUser();
+
+    const onChangeUser = (userNetflix: UserNetflix) => {
+        changeCurrentUser(userNetflix);
+        router.refresh();
+    };
+
+  return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <div className="flex gap-1 items-center">
+                    <Image src={currentUser ? currentUser.avatarUrl : "/profiles/profile-1.jpg"} 
+                    alt="Profile Image" width={35} height={35}/>
+                    <ChevronDown/>
+                </div>
+            </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 p-2 bg-black/80 border-transparent rounded-lg">
+                    {users.map((user)=>(
+                        <DropdownMenuItem key={user.id}
+                            onClick={() => onChangeUser(user)}
+                            className="flex gap-2 mb-3 group">
+                                <Image src={user.avatarUrl} 
+                                alt="Profile Image" 
+                                width={30} height={30}/>
+                                <p className="text-white 
+                                    group-hover:text-black font-medium">
+                                        {user.profileName}
+                                </p>
+                        </DropdownMenuItem>
+                    ))}
+                    <DropdownMenuItem className="flex gap-2 mb-3 group text-white cursor-pointer"
+                        onClick={() => router.push("/profiles")}>
+                        <Pencil className="text-white w-4 h-4"/>
+                        Administrar perfiles
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="flex gap-2 mb-3 text-white cursor-pointer"
+                    onClick={() => signOut()}>
+                        <LogOut className="text-white w-4 h-4"/>
+                        Cerrar sesión
+                    </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+
+    )
+}
