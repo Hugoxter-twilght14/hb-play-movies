@@ -15,5 +15,5 @@ export function BlockMovies(props: BlockMoviesProps) {
         </h3>
         <CarouselMovie movies={movies} isMyList={isMyList}/>
     </div>
-  )
+  );
 }

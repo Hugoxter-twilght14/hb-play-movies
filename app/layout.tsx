@@ -15,7 +15,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "HB Play Movies",
+  title: "HB PlayMovies",
   description: "Creación de HB Play Movies by HBStudios",
 };
 

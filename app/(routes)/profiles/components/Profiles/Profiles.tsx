@@ -51,8 +51,8 @@ export function Profiles(props: ProfilesProps) {
         console.log(error);
         toast({title: "Ha ocurrido un error al eliminar el perfil, intentalo de nuevo", 
             variant: "destructive"});
-    };
-  };
+    }
+  }
     return (
     <div>
         <div className="flex gap-7">
@@ -102,7 +102,7 @@ export function Profiles(props: ProfilesProps) {
 
                     </div>
                 </div>
-            ))};
+            ))}
 
             <AddProfile/>
         </div>

@@ -4,9 +4,7 @@ import { CarouselMovieProps } from "./CarouselMovie.types";
 import {
     Carousel,
     CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
+    CarouselItem
   } from "@/components/ui/carousel"
 import Image from "next/image";
 import { ActionsButtons } from "./ActionsButtons";
@@ -51,8 +49,6 @@ export  function CarouselMovie(props: CarouselMovieProps) {
         </CarouselItem>
     ))};
   </CarouselContent>
-  <CarouselPrevious />
-  <CarouselNext />
 </Carousel>
 
   )

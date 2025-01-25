@@ -43,5 +43,5 @@ export function NavbarDesktop(props: NavbarDesktopProps) {
         </div>
       
     </div>
-  )
+  );
 }

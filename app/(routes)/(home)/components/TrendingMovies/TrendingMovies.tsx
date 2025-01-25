@@ -31,7 +31,7 @@ export function TrendingMovies(props: TrendingMoviesProps) {
                          </div>
                          <InfoExtraFilm movie={movie}/>
                     </div>
-                ))};
+                ))}
             </div>
         </div>
     </div>

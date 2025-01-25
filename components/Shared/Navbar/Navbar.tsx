@@ -14,5 +14,5 @@ export function Navbar(props: NavbarProps) {
         <NavbarMobile users={users}/>
        </div>
     </nav>
-  )
+  );
 }

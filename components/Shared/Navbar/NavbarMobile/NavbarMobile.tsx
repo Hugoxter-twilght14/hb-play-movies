@@ -48,5 +48,5 @@ export default function NavbarMobile(props: NavbarMobileProps) {
 </Sheet>
 
     </div>
-  )
+  );
 }

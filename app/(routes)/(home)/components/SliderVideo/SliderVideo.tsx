@@ -18,13 +18,13 @@ export function SliderVideo() {
         md:px-0 md:left-[4%] z-20 top-0 -bottom-7 md:bottom-[36%]"
       >
         <div className="pt-24 md:pt-0">
-          <h2 className="text-2xl md:text-5xl lg:text-8xl font-bold">
-            HBStudios
+          <h2 className="text-2xl md:text-5xl lg:text-8xl font-bold my-5">
+            PlayMovies
           </h2>
           <p className="max-w-md mt-2 text-xs md:text-base">
-            Únete a nuestros programas de pruebas como beta tester
-            de nuestras apps donde aprenderás a desarrollar
-            tus habilidades como tester de verdad.
+            Bienvenido a PlayMovies, aqui encontraras
+            una colección de peliculas y series completamente gratis, 
+            gracias por tu preferencia.!! 
           </p>
           <div className="flex flex-col md:flex-row gap-4 mt-5">
             <Button size="lg" variant="secondary">

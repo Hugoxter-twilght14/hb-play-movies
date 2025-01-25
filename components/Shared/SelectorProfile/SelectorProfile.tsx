@@ -62,5 +62,5 @@ export function SelectorProfile(props: SelectorProfileProps) {
             </DropdownMenuContent>
         </DropdownMenu>
 
-    )
+    );
 }
