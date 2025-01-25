@@ -44,9 +44,8 @@ export function LoginForm() {
                 title: "Inicio de sesión exitosó",
               });
             }
+            router.push("/profiles");
           });
-
-          router.push("/profiles");
 
         } catch (error) {
           console.log(error);

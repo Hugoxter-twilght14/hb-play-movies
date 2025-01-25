@@ -55,7 +55,7 @@ export function Profiles(props: ProfilesProps) {
   }
     return (
     <div>
-        <div className="flex gap-7">
+        <div className="grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {users.map((user) =>(
                 <div key={user.id} className="text-center relative cursor-pointer" onClick={() => onClickUser(user)}>
                     <Image src={user.avatarUrl || ""} 
@@ -66,12 +66,14 @@ export function Profiles(props: ProfilesProps) {
                         "border-transparent hover:border-2 hover:border-white rounded-md")}
                     />
                     <p className="mt-2 text-gray-500 uppercase text-lg">
-                        {user.profileName};
+                        {user.profileName}
                     </p>
 
                     <div className={cn("top-14 cursor-pointer w-full flex gap-4 items-center justify-center z-20",
                         manageProfiles ? "absolute" : "hidden"
-                    )}>
+                    )}
+                    onClick={(event) => event.stopPropagation()}
+                    >
                         <AlertDialog>
                             <AlertDialogTrigger asChild>
                                 <div className="bg-white rounded-full hover:bg-red-100 p-1">

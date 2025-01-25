@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ActionsButtonFilmProps } from "./ActionsButtonFilm.types";
 import { useRouter } from "next/navigation";
-import { ChevronDown, Play } from "lucide-react";
+import { Play, X } from "lucide-react";
 
 export function ActionsButtonsFilm(props: ActionsButtonFilmProps) {
     const {idFilm} = props;
@@ -21,13 +21,16 @@ export function ActionsButtonsFilm(props: ActionsButtonFilmProps) {
           <Play className="text-zinc-900 h-3 w-3 fill-zinc-900"></Play>
         </Button>
       </div>
+        <p className="text-slate-50 text-[15px] flex items-center text-bold z-index">
+            {props.title}
+        </p>
       <Button
       size="icon"
       variant="ghost"
       className="bg-zinc-900 border-2 border-gray-400 rounded-full 
       flex items-center justify-center h-7 w-7 hover:bg-transparent hover:border-slate-50">
-        <ChevronDown width={10} height={10} 
-        className="text-slate-50 h-3 w-3"></ChevronDown>
+        <X width={10} height={10} 
+        className="text-slate-50 h-3 w-3"></X>
       </Button>
     </div>
   )

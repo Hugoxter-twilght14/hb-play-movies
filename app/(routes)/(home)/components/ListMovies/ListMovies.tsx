@@ -14,7 +14,7 @@ export function ListMovies(props: ListMoviesProps) {
     const lovedFilms = userNetflix ? lovedFilmsByUser[userNetflix] : [];
 
   return (
-    <div>
+    <div className="mt-16 sm:mt-[110px] md:mt-[40px]"> {/* Solo aplica en tablets y teléfonos */}
       <BlockMovies title="Recien Agregadas" 
       movies={movies} 
       isMyList={false}/>
