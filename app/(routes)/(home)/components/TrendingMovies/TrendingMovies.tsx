@@ -9,7 +9,7 @@ export function TrendingMovies(props: TrendingMoviesProps) {
   return (
     <div className="pt-11 md:pt-0 md:-top-24 lg:-top-28 relative px-[4%]">
     <h3 className="text-2xl font-semibold mb-3">
-        Series más populares en México
+        Lo más visto hoy
     </h3>
 
     <div>

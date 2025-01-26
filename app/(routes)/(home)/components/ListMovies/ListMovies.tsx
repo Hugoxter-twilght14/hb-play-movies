@@ -20,7 +20,7 @@ export function ListMovies(props: ListMoviesProps) {
       isMyList={false}/>
 
       <BlockMovies 
-      title="Mi Lista"
+      title="Peliculas que te gustaron"
       movies={lovedFilms}
       isMyList={true}/>
     </div>

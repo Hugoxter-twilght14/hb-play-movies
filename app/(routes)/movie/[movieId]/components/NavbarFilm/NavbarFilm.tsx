@@ -8,7 +8,7 @@ export function NavbarFilm(props: NavbarFilmProps) {
 
     const router = useRouter();
     const backToHome = () => {
-        router.push('/');
+        router.push('/peliculas');
     };
 
   return (
