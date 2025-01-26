@@ -7,15 +7,15 @@ export const itemsNavbar =[
     },
     {
         name: "Películas",
-        link: "/Peliculas",
+        link: "/peliculas",
     },
     {
         name: "Series",
-        link: "/Series",
+        link: "/series",
     },
     {
         name: "Novedades",
-        link: "/mas-vistos",
+        link: "/novedades",
     },
     {
         name: "Mi lista",
