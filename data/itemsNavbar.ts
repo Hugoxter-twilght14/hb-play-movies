@@ -14,6 +14,10 @@ export const itemsNavbar =[
         link: "/series",
     },
     {
+        name: "Anime",
+        link: "/anime",
+    },
+    {
         name: "Novedades",
         link: "/novedades",
     },

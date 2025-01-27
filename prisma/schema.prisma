@@ -65,3 +65,36 @@ model PopularMovie{
 
   ranking Int
 }
+
+model Serie {
+  id          String       @id @default(cuid())
+  title       String
+  thumbnailUrl String
+  genre       String[]
+  age         String
+  duration    String
+  trailerVideo String
+  createdAt   DateTime     @default(now())
+
+  seasons     Season[]     // Relación con las temporadas
+}
+
+model Season {
+  id          String       @id @default(cuid())
+  number      Int          // Número de la temporada
+  serieId     String
+  serie       Serie        @relation(fields: [serieId], references: [id])
+  episodes    Episode[]    // Relación con los episodios
+}
+
+
+model Episode {
+  id          String       @id @default(cuid())
+  number      Int          // Número del episodio
+  title       String
+  duration    String       // Duración del episodio
+  videoUrl    String       // URL del video del episodio
+  seasonId    String
+  season      Season       @relation(fields: [seasonId], references: [id])
+}
+
