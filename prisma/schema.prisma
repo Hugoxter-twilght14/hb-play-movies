@@ -98,3 +98,33 @@ model Episode {
   season      Season       @relation(fields: [seasonId], references: [id])
 }
 
+model Anime {
+  id           String        @id @default(cuid())
+  title        String
+  thumbnailUrl String
+  genre        String[]
+  age          String
+  duration     String
+  trailerVideo String
+  createdAt    DateTime      @default(now())
+
+  seasons      AnimeSeason[] // Relación con las temporadas
+}
+
+model AnimeSeason {
+  id           String        @id @default(cuid())
+  number       Int           // Número de la temporada
+  animeId      String
+  anime        Anime         @relation(fields: [animeId], references: [id])
+  episodes     AnimeEpisode[] // Relación con los episodios
+}
+
+model AnimeEpisode {
+  id           String        @id @default(cuid())
+  number       Int           // Número del episodio
+  title        String
+  duration     String        // Duración del episodio
+  videoUrl     String        // URL del video del episodio
+  animeSeasonId String
+  animeSeason  AnimeSeason   @relation(fields: [animeSeasonId], references: [id])
+}

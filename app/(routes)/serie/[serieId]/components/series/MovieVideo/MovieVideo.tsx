@@ -14,7 +14,11 @@ export function MovieVideo({ currentMovie }: MovieVideoProps) {
     };
 
     return (
-        <div onClick={handlePlay}> {/* Al hacer clic en el contenedor, se reproduce el video */}
+        <div
+            onClick={handlePlay}
+           className="relative w-full pb-[56.25%] shadow-lg"
+        >
+            {/* Al hacer clic en el contenedor, se reproduce el video */}
             <ReactPlayer
                 url={currentMovie}
                 loop={true}
@@ -23,8 +27,10 @@ export function MovieVideo({ currentMovie }: MovieVideoProps) {
                 playing={playing} // Solo se reproduce si el estado es true
                 muted={false}
                 controls={true}
+                 className="absolute top-0 left-0"
             />
         </div>
     );
 }
+
 

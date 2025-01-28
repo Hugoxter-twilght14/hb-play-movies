@@ -15,14 +15,10 @@ export const itemsNavbar =[
     },
     {
         name: "Anime",
-        link: "/anime",
+        link: "/animes",
     },
     {
         name: "Novedades",
         link: "/novedades",
-    },
-    {
-        name: "Mi lista",
-        link: "/mi-lista",
     },
 ];
