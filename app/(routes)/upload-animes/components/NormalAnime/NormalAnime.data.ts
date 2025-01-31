@@ -87,5 +87,121 @@ export const dataAnime = [
         },
       ],
     },
+    {
+      title: "Sakamoto Days",
+      thumbnailUrl:
+        "https://raw.githubusercontent.com/Hugoxter-twilght14/images-for-playMovies/refs/heads/main/Series-images/serie-1.jpg",
+      genre: ["Acción", "recuentos de la vida", "comedia"],
+      age: "13",
+      duration: "Serie en emisión",
+      trailerVideo: "https://youtu.be/bF3g6__aNYI?si=scgaXo6JiKzTJFD7",
+      seasons: [
+        {
+          number: 1,
+          episodes: [
+            {
+              number: 1,
+              title: "01.El asesino legendario",
+              duration: "25 min",
+              videoUrl: "https://www.dropbox.com/scl/fi/5w7v7q3e66ey3fjv1zxq4/01-SKMTODays.mp4?rlkey=pukaw7sm5wvicxvrze52vjue8&st=m3holvzj&dl=0",
+            },
+            {
+              number: 2,
+              title: "02.La batalla contra Son Hee y Bacho",
+              duration: "25 min",
+              videoUrl: "https://www.dropbox.com/scl/fi/dirjb8prd0uz2ktow7c22/02-SKMTODays.mp4?rlkey=s6yw5ta2jxnwnypn6bkb8dw44&st=a8y2lzye&dl=0",
+            },
+            {
+              number: 3,
+              title: "03.Bienvenido a sugar park",
+              duration: "25 min",
+              videoUrl: "https://www.dropbox.com/scl/fi/mnyr989th7x7z12lwylxl/03-SAKMTODays.mp4?rlkey=uj2hksbr8ldt3ocgdb4xj8u5r&st=x02bf45x&dl=0",
+            },
+            {
+              number: 4,
+              title: "04.Hard Boiled",
+              duration: "24 min",
+              videoUrl: "https://www.dropbox.com/scl/fi/k70ddi8cfvtgnnc46kw42/04-SAKMTODays.mp4?rlkey=3s6la4hhyb9bphgxg28tg2bzj&st=mz41vac5&dl=0",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      title: "Isekai Suicide Squad",
+      thumbnailUrl:
+        "https://raw.githubusercontent.com/Hugoxter-twilght14/images-for-playMovies/refs/heads/main/anime-images/IsekaiSSQad-1.jpg",
+      genre: ["Acción", "ciencia ficción", "fantástica", "superhéroes", "isekai", "humor negro"],
+      age: "13",
+      duration: "Isekai - Serie",
+      trailerVideo: "https://youtu.be/FRgWcCQTnz4?si=fh7DYgKbbRu1ZACt",
+      seasons: [
+        {
+          number: 1,
+          episodes: [
+            {
+              number: 1,
+              title: "01.Episodio 1",
+              duration: "25 min",
+              videoUrl: "https://ia800807.us.archive.org/2/items/10-isekai-suicid-3-5qu-4d/01-Isekai%20Suicid3%205qu4d.mp4",
+            },
+            {
+              number: 1,
+              title: "02.Episodio 2",
+              duration: "25 min",
+              videoUrl: "https://ia800807.us.archive.org/2/items/10-isekai-suicid-3-5qu-4d/02-Isekai%20Suicid3%205qu4d.mp4",
+            },
+            {
+              number: 1,
+              title: "03.Episodio 3",
+              duration: "25 min",
+              videoUrl: "https://ia600807.us.archive.org/2/items/10-isekai-suicid-3-5qu-4d/03-Isekai%20Suicid3%205qu4d.mp4",
+            },
+            {
+              number: 1,
+              title: "04.Episodio 4",
+              duration: "25 min",
+              videoUrl: "https://ia800807.us.archive.org/2/items/10-isekai-suicid-3-5qu-4d/04-Isekai%20Suicid3%205qu4d.mp4",
+            },
+            {
+              number: 1,
+              title: "05.Episodio 5",
+              duration: "25 min",
+              videoUrl: "https://ia600807.us.archive.org/2/items/10-isekai-suicid-3-5qu-4d/05-Isekai%20Suicid3%205qu4d.mp4",
+            },
+            {
+              number: 1,
+              title: "06.Episodio 6",
+              duration: "25 min",
+              videoUrl: "https://ia800807.us.archive.org/2/items/10-isekai-suicid-3-5qu-4d/06-Isekai%20Suicid3%205qu4d.mp4",
+            },
+            {
+              number: 1,
+              title: "07.Episodio 7",
+              duration: "25 min",
+              videoUrl: "https://ia600807.us.archive.org/2/items/10-isekai-suicid-3-5qu-4d/07-Isekai%20Suicid3%205qu4d.mp4",
+            },
+            {
+              number: 1,
+              title: "08.Episodio 8",
+              duration: "25 min",
+              videoUrl: "https://ia600807.us.archive.org/2/items/10-isekai-suicid-3-5qu-4d/08-Isekai%20Suicid3%205qu4d.mp4",
+            },
+            {
+              number: 1,
+              title: "09.Episodio 9",
+              duration: "25 min",
+              videoUrl: "https://ia800807.us.archive.org/2/items/10-isekai-suicid-3-5qu-4d/09-Isekai%20Suicid3%205qu4d.mp4",
+            },
+            {
+              number: 1,
+              title: "10.Episodio 10",
+              duration: "25 min",
+              videoUrl: "https://ia800807.us.archive.org/2/items/10-isekai-suicid-3-5qu-4d/10-Isekai%20Suicid3%205qu4d.mp4",
+            },
+          ],
+        },
+      ],
+    },
   ];
   
