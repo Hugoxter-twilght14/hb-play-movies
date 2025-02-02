@@ -21,6 +21,8 @@ type Anime = {
   age: string;
   duration: string;
   trailerVideo: string;
+  description: string; // Nuevo campo description
+  type: "anime"; // Nuevo campo type
   seasons: Season[];
 };
 
@@ -46,7 +48,9 @@ export async function POST(req: NextRequest) {
           !anime.genre ||
           !anime.age ||
           !anime.duration ||
-          !anime.trailerVideo
+          !anime.trailerVideo ||
+          !anime.description || // Validar description
+          !anime.type // Validar type
         ) {
           throw new Error(`Datos incompletos para el anime: ${anime.title}`);
         }
@@ -59,6 +63,8 @@ export async function POST(req: NextRequest) {
             age: anime.age,
             duration: anime.duration,
             trailerVideo: anime.trailerVideo,
+            description: anime.description, // Guardar description
+            type: anime.type, // Guardar type como "anime"
             seasons: {
               create: anime.seasons.map((season) => ({
                 number: season.number,

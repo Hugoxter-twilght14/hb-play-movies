@@ -7,6 +7,8 @@ interface SerieInfoProps {
   age: string;
   duration: string;
   trailerVideo: string;
+  description: string;  
+  type: string;         
 }
 
 const SerieInfo: React.FC<SerieInfoProps> = ({
@@ -16,6 +18,8 @@ const SerieInfo: React.FC<SerieInfoProps> = ({
   age,
   duration,
   trailerVideo,
+  description, 
+  type,       
 }) => {
   return (
     <div className="p-4 pt-[100px] bg-gray-900 rounded-lg shadow-lg text-white max-w-9xl mt-[-36px] mx-auto">
@@ -31,9 +35,11 @@ const SerieInfo: React.FC<SerieInfoProps> = ({
         {/* Información de la serie a la derecha */}
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-3xl font-bold mb-2">{title}</h1>
-          <p className="text-sm text-gray-400">Género: {genre.join(", ")}</p>
+          <p className="text-sm text-gray-400">Tipo: {type}</p>
+          <p className="text-sm text-gray-400">{duration}</p>
+          <p className="text-sm text-gray-400 mt-2">Sipnosis: {description}</p>
           <p className="text-sm text-gray-400">Edad: {age}+</p>
-          <p className="text-sm text-gray-400">Duración: {duration}</p>
+          <p className="text-sm text-gray-400">Género: {genre.join(", ")}</p>
         </div>
 
         {/* Tráiler */}

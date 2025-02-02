@@ -69,11 +69,13 @@ model PopularMovie{
 model Serie {
   id          String       @id @default(cuid())
   title       String
+  description String
   thumbnailUrl String
   genre       String[]
   age         String
   duration    String
   trailerVideo String
+  type        String
   createdAt   DateTime     @default(now())
 
   seasons     Season[]     // Relación con las temporadas
@@ -101,11 +103,13 @@ model Episode {
 model Anime {
   id           String        @id @default(cuid())
   title        String
+  description String
   thumbnailUrl String
   genre        String[]
   age          String
   duration     String
   trailerVideo String
+  type        String
   createdAt    DateTime      @default(now())
 
   seasons      AnimeSeason[] // Relación con las temporadas

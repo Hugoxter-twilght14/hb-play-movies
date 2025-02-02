@@ -4,10 +4,12 @@ import { EpisodeSelector } from "./components/series/EpisodeSelector";
 import SerieInfo from "./components/SerieInfo/SerieInfo";
 
 export default async function Page({ params }: { params: { serieId: string } }) {
-    // Obtener la serie con temporadas y episodios desde la base de datos
+    // Obtener la serie con temporadas, episodios y los nuevos campos description y type desde la base de datos
     const serie = await db.serie.findUnique({
         where: { id: params.serieId },
-        include: { seasons: { include: { episodes: true } } },
+        include: { 
+            seasons: { include: { episodes: true } } 
+        },
     });
 
     // Mostrar mensaje si la serie no existe
@@ -21,16 +23,18 @@ export default async function Page({ params }: { params: { serieId: string } }) 
             <NavbarFilm title={serie.title} />
 
             <SerieInfo
-                    title={serie.title}
-                    thumbnailUrl={serie.thumbnailUrl}
-                    genre={serie.genre}
-                    age={serie.age}
-                    duration={serie.duration}
-                    trailerVideo={serie.trailerVideo}
-                />
+                title={serie.title}
+                thumbnailUrl={serie.thumbnailUrl}
+                genre={serie.genre}
+                age={serie.age}
+                duration={serie.duration}
+                trailerVideo={serie.trailerVideo}
+                description={serie.description}
+                type={serie.type}
+            />
             
-                {/* Selector de temporadas y episodios */}
-                <EpisodeSelector seasons={serie.seasons} />
+            {/* Selector de temporadas y episodios */}
+            <EpisodeSelector seasons={serie.seasons} />
         </div>
     );
 }

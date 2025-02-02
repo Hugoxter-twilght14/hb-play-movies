@@ -1,6 +1,8 @@
 export const dataAnime = [
     {
       title: "Ranma ½ - Remake",
+      description: "Ranma ½ es una serie de comedia y acción que cuenta la historia de Ranma, un joven que se ve afectado por una maldición que lo convierte en una chica cuando se moja con agua fría.",
+      type: "serie", // Añadimos el tipo
       thumbnailUrl:
         "https://raw.githubusercontent.com/Hugoxter-twilght14/images-for-playMovies/refs/heads/main/anime-images/Ranma12-t1.jpg",
       genre: ["Acción", "Comedia", "romántica", "Aventura", "Ecchi"],
@@ -89,6 +91,8 @@ export const dataAnime = [
     },
     {
       title: "Sakamoto Days",
+      description: "Sakamoto es un asesino retirado",
+      type:"Anime",
       thumbnailUrl:
         "https://raw.githubusercontent.com/Hugoxter-twilght14/images-for-playMovies/refs/heads/main/Series-images/serie-1.jpg",
       genre: ["Acción", "recuentos de la vida", "comedia"],
@@ -129,6 +133,8 @@ export const dataAnime = [
     },
     {
       title: "Isekai Suicide Squad",
+      description: "Harley Queen",
+      type:"Anime",
       thumbnailUrl:
         "https://raw.githubusercontent.com/Hugoxter-twilght14/images-for-playMovies/refs/heads/main/anime-images/IsekaiSSQad-1.jpg",
       genre: ["Acción", "ciencia ficción", "fantástica", "superhéroes", "isekai", "humor negro"],

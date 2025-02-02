@@ -19,17 +19,21 @@ export async function POST(req: Request) {
           age,
           duration,
           trailerVideo,
+          description, // Nuevo campo description
+          type, // Nuevo campo type
           seasons,
         } = serie;
 
-        // Verificar que los campos obligatorios estén presentes
+        // Verificar que los campos obligatorios estén presentes, incluyendo los nuevos campos
         if (
           !title ||
           !thumbnailUrl ||
           !genre ||
           !age ||
           !duration ||
-          !trailerVideo
+          !trailerVideo ||
+          !description || // Validación de description
+          !type // Validación de type
         ) {
           throw new Error(`Faltan datos para crear la serie: ${title}`);
         }
@@ -63,7 +67,7 @@ export async function POST(req: Request) {
             })
           : [];
 
-        // Crear la serie con temporadas y episodios
+        // Crear la serie con temporadas y episodios, incluyendo los nuevos campos
         return await db.serie.create({
           data: {
             title,
@@ -72,6 +76,8 @@ export async function POST(req: Request) {
             age,
             duration,
             trailerVideo,
+            description, // Guardar description
+            type, // Guardar type
             seasons: {
               create: validatedSeasons,
             },

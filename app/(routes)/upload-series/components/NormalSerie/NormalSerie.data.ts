@@ -1,6 +1,8 @@
 export const dataSeries = [
   {
     title: "Sakamoto Days",
+    description: "Sakamoto es un asesino retirado",
+      type:"Serie",
     thumbnailUrl: "https://raw.githubusercontent.com/Hugoxter-twilght14/images-for-playMovies/refs/heads/main/Series-images/serie-1.jpg",
     genre: ["Acción", "Aventura"],
     age: "13",
