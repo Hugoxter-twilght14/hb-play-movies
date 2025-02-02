@@ -26,7 +26,7 @@ export function EpisodeSelector({ seasons }: EpisodeSelectorProps) {
     return (
         <div>
             {/* Selector de temporadas */}
-            <div className="my-20">
+            <div className="my-10 mx-5">
                 <label htmlFor="seasons" className="mr-2 font-semibold">Selecciona una temporada:</label>
                 <select
                     id="seasons"

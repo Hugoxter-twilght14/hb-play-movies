@@ -134,7 +134,7 @@ export const dataAnime = [
       genre: ["Acción", "ciencia ficción", "fantástica", "superhéroes", "isekai", "humor negro"],
       age: "13",
       duration: "Isekai - Serie",
-      trailerVideo: "https://youtu.be/FRgWcCQTnz4?si=fh7DYgKbbRu1ZACt",
+      trailerVideo: "https://ia800807.us.archive.org/2/items/10-isekai-suicid-3-5qu-4d/01-Isekai%20Suicid3%205qu4d.mp4",
       seasons: [
         {
           number: 1,

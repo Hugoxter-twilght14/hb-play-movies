@@ -20,7 +20,7 @@ export function EpisodeSelector({ anime }: { anime: Anime }) {
     return (
         <div>
             {/* Barra de selección de temporadas */}
-            <div className="my-20">
+            <div className="my-10 mx-5">
                 <label htmlFor="seasons" className="mr-2 font-semibold text-white">Selecciona una temporada:</label>
                 <select
                     id="seasons"
