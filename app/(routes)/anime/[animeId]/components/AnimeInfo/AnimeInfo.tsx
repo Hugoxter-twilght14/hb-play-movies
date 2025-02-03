@@ -44,7 +44,7 @@ const AnimeInfo: React.FC<AnimeInfoProps> = ({
 
         {/* Tráiler */}
         {trailerVideo && (
-          <div className="w-full md:w-1/3 mt-4 md:mt-0 md:ml-1 transform md:translate-x-[-120px]"> {/* Añadí transform para mover más a la derecha */}
+          <div className="w-full md:w-1/3 mt-4 md:mt-0 md:ml-1 transform md:translate-x-[-10px]"> {/* Añadí transform para mover más a la derecha */}
             <h2 className="text-lg font-semibold mb-2 text-center lg:text-left">
               Tráiler
             </h2>

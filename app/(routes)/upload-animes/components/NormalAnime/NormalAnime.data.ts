@@ -2,12 +2,12 @@ export const dataAnime = [
     {
       title: "Ranma ½ - Remake",
       description: "Ranma ½ es una serie de comedia y acción que cuenta la historia de Ranma, un joven que se ve afectado por una maldición que lo convierte en una chica cuando se moja con agua fría.",
-      type: "serie", // Añadimos el tipo
+      type: "serie",
       thumbnailUrl:
         "https://raw.githubusercontent.com/Hugoxter-twilght14/images-for-playMovies/refs/heads/main/anime-images/Ranma12-t1.jpg",
       genre: ["Acción", "Comedia", "romántica", "Aventura", "Ecchi"],
       age: "13",
-      duration: "Serie",
+      duration: "1 Temporada",
       trailerVideo: "https://youtu.be/MGRm4IzK1SQ",
       seasons: [
         {
@@ -97,7 +97,7 @@ export const dataAnime = [
         "https://raw.githubusercontent.com/Hugoxter-twilght14/images-for-playMovies/refs/heads/main/Series-images/serie-1.jpg",
       genre: ["Acción", "recuentos de la vida", "comedia"],
       age: "13",
-      duration: "Serie en emisión",
+      duration: "1 Temporada - En emison",
       trailerVideo: "https://youtu.be/bF3g6__aNYI?si=scgaXo6JiKzTJFD7",
       seasons: [
         {
@@ -139,7 +139,7 @@ export const dataAnime = [
         "https://raw.githubusercontent.com/Hugoxter-twilght14/images-for-playMovies/refs/heads/main/anime-images/IsekaiSSQad-1.jpg",
       genre: ["Acción", "ciencia ficción", "fantástica", "superhéroes", "isekai", "humor negro"],
       age: "13",
-      duration: "Isekai - Serie",
+      duration: "1 Temporada",
       trailerVideo: "https://ia800807.us.archive.org/2/items/10-isekai-suicid-3-5qu-4d/01-Isekai%20Suicid3%205qu4d.mp4",
       seasons: [
         {

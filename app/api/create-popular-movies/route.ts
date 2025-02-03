@@ -9,9 +9,9 @@ export async function POST(req: Request) {
     }
     try {
         const createdMovies = await Promise.all(movies.map(async (movie) => {
-            const {title, ranking, movieVideo, trailerVideo, thumbnailUrl, genre, duration, age} = movie;
+            const {title, ranking, movieVideo, trailerVideo, thumbnailUrl, genre, duration, age, descriptionPelicula, typePelicula} = movie;
 
-            if ( !title || !ranking || !movieVideo || !trailerVideo || !thumbnailUrl || !genre || !duration || !age) {
+            if ( !title || !ranking || !movieVideo || !trailerVideo || !thumbnailUrl || !genre || !duration || !age || !descriptionPelicula || !typePelicula) {
                 throw new Error('Faltan datos para poder subir la pelicula: ${title}');
             }
 
@@ -25,6 +25,8 @@ export async function POST(req: Request) {
                     duration,
                     trailerVideo,
                     movieVidieo: movieVideo,
+                    descriptionPelicula,
+                    typePelicula
                 }
             });
 

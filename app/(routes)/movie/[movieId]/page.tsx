@@ -1,11 +1,11 @@
+// pages/movie/[movieId].tsx
+
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { NavbarFilm } from "./components/NavbarFilm";
-import { MovieVideo } from "./components/MovieVideo";
+import { MovieDetail } from "./components/MovieDetail";
 
-export default async function page({params}:
-    {params: {movieId: string}}
-) {
+export default async function page({params}: {params: {movieId: string}}) {
     const movieFilm = await db.movie.findUnique({
         where: {
             id: params.movieId,
@@ -19,26 +19,17 @@ export default async function page({params}:
     });
 
     if (!movieFilm && !popularMovie) {
-        redirect("/");
+        redirect("/"); // Redirige si no se encuentra la película
     }
 
-    const currentMovie = movieFilm
-     ? movieFilm.movieVidieo 
-     : popularMovie ? 
-     popularMovie.movieVidieo 
-    : "";
+    const currentMovie = movieFilm || popularMovie;
 
-    const titleMovie = movieFilm
-     ? movieFilm.title 
-     : popularMovie ? 
-     popularMovie.title 
-     : "";
-
-  return (
-    <div className="h-screen w-full bg-black">
-        <NavbarFilm title={titleMovie} />
-        <MovieVideo currentMovie={currentMovie} />
-      {/*<p>{currentMovie}</p>*/} 
-    </div>
-  )
+    return (
+        <div className="h-screen w-full bg-black">
+            <NavbarFilm title={currentMovie?.title || "Película"} />
+            {/* Usamos el operador de afirmación non-null para indicar que currentMovie no es null */}
+            <MovieDetail movie={currentMovie!} />
+        </div>
+    );
 }
+

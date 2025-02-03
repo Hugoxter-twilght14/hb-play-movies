@@ -1,43 +1,45 @@
 import { db } from "@/lib/db";
-import {NextResponse} from "next/server";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-    const {movies} = await req.json();
-
-    if (!movies || !Array.isArray(movies) || movies.length === 0) {
-        return new NextResponse("No hay peliculas", {status: 400});
-    }
-
     try {
-        const createdMovies = await Promise.all(movies.map(async (movie) => {
-            const {id, title, movieVideo, trailerVideo, thumbnailUrl, genre, duration, age} = movie;
+        const { movies } = await req.json();
 
-            if ( !title || !movieVideo || !trailerVideo || !thumbnailUrl || !genre || !duration || !age) {
-                throw new Error('Faltan datos para poder subirla pelicula: ${title}');
-            }
+        // Validar si `movies` es un array con datos
+        if (!movies || !Array.isArray(movies) || movies.length === 0) {
+            return new NextResponse("No hay películas para subir", { status: 400 });
+        }
 
-            return await db.movie.create({
-                data: {
-                    id,
-                    title,
-                    thumbnailUrl,
-                    genre,
-                    age,
-                    duration,
-                    trailerVideo,
-                    movieVidieo: movieVideo,
-                    createdAt: new Date(),
+        const createdMovies = await Promise.all(
+            movies.map(async (movie) => {
+                const { title, movieVideo, trailerVideo, thumbnailUrl, genre, duration, age, typePelicula, descriptionPelicula } = movie;
+
+                // Validación de campos obligatorios
+                if (!title || !movieVideo || !trailerVideo || !thumbnailUrl || !genre || !duration || !age || !typePelicula || !descriptionPelicula) {
+                    throw new Error(`Faltan datos para poder subir la película: ${title || "Desconocido"}`);
                 }
-            });
 
-        })
-    );
-        return NextResponse.json(createdMovies, {status: 201});
+                return await db.movie.create({
+                    data: {
+                        title,
+                        thumbnailUrl,
+                        genre,
+                        age,
+                        duration,
+                        trailerVideo,
+                        movieVidieo: movieVideo,
+                        typePelicula,
+                        descriptionPelicula,
+                        createdAt: new Date(),
+                    }
+                });
+            })
+        );
+
+        return NextResponse.json(createdMovies, { status: 201 });
 
     } catch (error) {
-        console.log(error);
-        return NextResponse.json("Internal server error", {status: 500});
+        console.error("Error al subir películas:", error);
+        return NextResponse.json({ error: "Internal server error", details: error }, { status: 500 });
     }
-
-
 }

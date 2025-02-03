@@ -36,15 +36,15 @@ const SerieInfo: React.FC<SerieInfoProps> = ({
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-3xl font-bold mb-2">{title}</h1>
           <p className="text-sm text-gray-400">Tipo: {type}</p>
-          <p className="text-sm text-gray-400">{duration}</p>
           <p className="text-sm text-gray-400 mt-2">Sipnosis: {description}</p>
+          <p className="text-sm text-gray-400">{duration}</p>
           <p className="text-sm text-gray-400">Edad: {age}+</p>
           <p className="text-sm text-gray-400">Género: {genre.join(", ")}</p>
         </div>
 
         {/* Tráiler */}
         {trailerVideo && (
-          <div className="w-full md:w-1/3 mt-4 md:mt-0 md:ml-4 transform md:translate-x-[-120px]">
+          <div className="w-full md:w-1/3 mt-4 md:mt-0 md:ml-4 transform md:translate-x-[-10px]">
             <h2 className="text-lg font-semibold mb-2 text-center lg:text-left">
               Tráiler
             </h2>

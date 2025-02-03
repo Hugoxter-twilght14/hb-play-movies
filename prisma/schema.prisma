@@ -49,6 +49,8 @@ model Movie {
   duration String
   trailerVideo String
   movieVidieo String
+  typePelicula String
+  descriptionPelicula String
 
   createdAt DateTime @default(now())
 }
@@ -62,6 +64,8 @@ model PopularMovie{
   duration String
   trailerVideo String
   movieVidieo String
+  typePelicula String
+  descriptionPelicula String
 
   ranking Int
 }
