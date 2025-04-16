@@ -6,31 +6,46 @@ import { useState } from "react";
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 export function MovieVideo({ currentMovie }: MovieVideoProps) {
-    const [playing, setPlaying] = useState(false); // Estado para controlar la reproducción
+  const [playing, setPlaying] = useState(false); // Estado para reproducir tras clic
 
-    // Función para manejar el clic y empezar a reproducir
-    const handlePlay = () => {
-        setPlaying(true); // Reproducir cuando el usuario hace clic
-    };
+  const isEmbedLink =
+    currentMovie.includes("yourupload.com/embed") ||
+    currentMovie.includes("streamtape.com/e/") ||
+    currentMovie.includes("dailymotion.com/embed") ||
+    currentMovie.includes("geo.dailymotion.com/player.html") ||
+    currentMovie.includes("ok.ru/videoembed");
 
-    return (
-        <div
-            onClick={handlePlay}
-           className="relative w-full pb-[56.25%] shadow-lg"
-        >
-            {/* Al hacer clic en el contenedor, se reproduce el video */}
-            <ReactPlayer
-                url={currentMovie}
-                loop={true}
-                width="100%"
-                height="100%"
-                playing={playing} // Solo se reproduce si el estado es true
-                muted={false}
-                controls={true}
-                 className="absolute top-0 left-0"
-            />
-        </div>
-    );
+  return (
+    <div
+      onClick={() => setPlaying(true)}
+      className="relative w-full pb-[56.25%] shadow-lg"
+    >
+      {isEmbedLink ? (
+        <iframe
+          src={currentMovie}
+          allowFullScreen
+          allow="autoplay"
+          className="absolute top-0 left-0 w-full h-full border-none"
+        />
+      ) : (
+        <ReactPlayer
+          url={currentMovie}
+          loop={true}
+          width="100%"
+          height="100%"
+          playing={playing}
+          muted={false}
+          controls={true}
+          className="absolute top-0 left-0"
+          config={{
+            file: {
+              attributes: {
+                controlsList: "nodownload",
+              },
+            },
+          }}
+        />
+      )}
+    </div>
+  );
 }
-
-

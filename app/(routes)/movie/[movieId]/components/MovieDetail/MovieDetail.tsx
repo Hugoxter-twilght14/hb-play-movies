@@ -47,7 +47,7 @@ export function MovieDetail({ movie }: MovieDetailProps) {
       {/* Video principal de la película */}
       <div className="mt-8">
         <h3 className="text-2xl font-semibold mb-4">Ver Película</h3>
-        <div className="aspect-w-16 aspect-h-9">
+        <div className="w-full max-w-[900px] aspect-video mx-auto rounded-lg shadow-md">
           <MovieVideo currentMovie={movie.movieVidieo} />
         </div>
       </div>
