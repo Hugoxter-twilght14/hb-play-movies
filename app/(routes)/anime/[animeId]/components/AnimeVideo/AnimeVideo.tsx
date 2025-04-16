@@ -1,7 +1,6 @@
 "use client";
 import { AnimeVideoProps } from "./AnimeVideo.types";
 import dynamic from "next/dynamic";
-import { useState } from "react";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
