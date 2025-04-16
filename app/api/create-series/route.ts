@@ -2,6 +2,19 @@ import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 
+// Define el tipo de servidor y episodio
+type Server = {
+  name: string;
+  url: string;
+};
+
+type Episode = {
+  number: number;
+  title: string;
+  duration: string;
+  servers: Server[];
+};
+
 export async function POST(req: Request) {
   const { series } = await req.json();
 
@@ -26,7 +39,7 @@ export async function POST(req: Request) {
 
         const validatedSeasons = Array.isArray(seasons)
           ? seasons.map((season) => {
-              const validatedEpisodes = season.episodes.map((ep: any) => ({
+              const validatedEpisodes = season.episodes.map((ep: Episode) => ({
                 number: ep.number,
                 title: ep.title,
                 duration: ep.duration,
