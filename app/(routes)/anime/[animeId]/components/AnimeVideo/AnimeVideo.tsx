@@ -4,16 +4,27 @@ import dynamic from "next/dynamic";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
+interface Server {
+  name: string;
+  url: string;
+}
+
+interface AnimeVideoProps {
+  servers?: Server[];
+}
+
 export function AnimeVideo({ servers = [] }: AnimeVideoProps) {
-  if (!servers.length) {
+  const [activeServer, setActiveServer] = useState<Server | null>(
+    servers.length > 0 ? servers[0] : null
+  );
+
+  if (!activeServer) {
     return (
       <div className="text-center text-white my-10">
         No hay servidores disponibles para este episodio.
       </div>
     );
   }
-
-  const [activeServer, setActiveServer] = useState<Server>(servers[0]);
 
   const isEmbedLink =
     activeServer.url.includes("yourupload.com/embed") ||
