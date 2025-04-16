@@ -1,13 +1,10 @@
 "use client";
 import { MovieVideoProps } from "./MovieVideo.types";
 import dynamic from "next/dynamic";
-import { useState } from "react";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 export function MovieVideo({ currentMovie }: MovieVideoProps) {
-  const [playing, setPlaying] = useState(false); // Estado para reproducir tras clic
-
   const isEmbedLink =
     currentMovie.includes("yourupload.com/embed") ||
     currentMovie.includes("streamtape.com/e/") ||
@@ -16,32 +13,26 @@ export function MovieVideo({ currentMovie }: MovieVideoProps) {
     currentMovie.includes("ok.ru/videoembed");
 
   return (
-    <div
-      onClick={() => setPlaying(true)}
-      className="relative w-full pb-[56.25%] shadow-lg"
-    >
+    <div className="relative w-full max-w-[900px] mx-auto aspect-video">
       {isEmbedLink ? (
         <iframe
           src={currentMovie}
           allowFullScreen
-          allow="autoplay"
           className="absolute top-0 left-0 w-full h-full border-none"
+          sandbox="allow-scripts allow-same-origin allow-presentation"
         />
       ) : (
         <ReactPlayer
           url={currentMovie}
-          loop={true}
           width="100%"
           height="100%"
-          playing={playing}
+          controls
+          playing={false}
           muted={false}
-          controls={true}
           className="absolute top-0 left-0"
           config={{
             file: {
-              attributes: {
-                controlsList: "nodownload",
-              },
+              attributes: { controlsList: "nodownload" },
             },
           }}
         />

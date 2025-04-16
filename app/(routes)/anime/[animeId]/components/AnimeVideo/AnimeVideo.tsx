@@ -1,10 +1,12 @@
 "use client";
 import { AnimeVideoProps } from "./AnimeVideo.types";
 import dynamic from "next/dynamic";
+import { useState } from "react";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 export function AnimeVideo({ currentAnime }: AnimeVideoProps) {
+
   const isEmbedLink =
     currentAnime.includes("yourupload.com/embed") ||
     currentAnime.includes("streamtape.com/e/") ||
@@ -13,14 +15,17 @@ export function AnimeVideo({ currentAnime }: AnimeVideoProps) {
     currentAnime.includes("ok.ru/videoembed");
 
   return (
-    <div className="relative w-full pb-[56.25%]">
+    <div className="relative w-full max-w-[900px] mx-auto aspect-video">
       {isEmbedLink ? (
-        <iframe
-          src={currentAnime}
-          allowFullScreen
-          allow="autoplay"
-          className="absolute top-0 left-0 w-full h-full border-none"
-        />
+        <>
+          <iframe
+            src={currentAnime}
+            allowFullScreen
+            className="absolute top-0 left-0 w-full h-full border-none"
+            sandbox="allow-scripts allow-same-origin allow-presentation"
+            
+          />
+        </>
       ) : (
         <ReactPlayer
           url={currentAnime}

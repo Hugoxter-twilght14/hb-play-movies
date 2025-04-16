@@ -110,7 +110,7 @@ export function FormAddProfile(props: FormAddProfileProps) {
                             </FormLabel>
                         </FormItem>
                     )
-                )};
+                )}
                     
                 </RadioGroup>
               </FormControl>

@@ -47,7 +47,7 @@ export  function CarouselMovie(props: CarouselMovieProps) {
                     </CardContent>
             </Card>
         </CarouselItem>
-    ))};
+    ))}
   </CarouselContent>
 </Carousel>
 
