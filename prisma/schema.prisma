@@ -41,98 +41,93 @@ model UserNetflix{
 }
 
 model Movie {
-  id String @id @default(cuid())
-  title String
-  thumbnailUrl String
-  genre String[]
-  age String
-  duration String
-  trailerVideo String
-  movieVidieo String
-  typePelicula String
-  descriptionPelicula String
-
-  createdAt DateTime @default(now())
+  id                    String   @id @default(cuid())
+  title                 String
+  thumbnailUrl          String
+  genre                 String[]
+  age                   String
+  duration              String
+  trailerVideo          String
+  servers               Json?     
+  typePelicula          String
+  descriptionPelicula   String
+  createdAt             DateTime @default(now())
 }
 
-model PopularMovie{
-  id String @id @default(cuid())
-  title String
-  thumbnailUrl String
-  genre String[]
-  age String
-  duration String
-  trailerVideo String
-  movieVidieo String
-  typePelicula String
-  descriptionPelicula String
-
-  ranking Int
+model PopularMovie {
+  id                    String   @id @default(cuid())
+  title                 String
+  thumbnailUrl          String
+  genre                 String[]
+  age                   String
+  duration              String
+  trailerVideo          String
+  servers               Json?     
+  typePelicula          String
+  descriptionPelicula   String
+  ranking               Int
 }
 
 model Serie {
-  id          String       @id @default(cuid())
-  title       String
-  description String
-  thumbnailUrl String
-  genre       String[]
-  age         String
-  duration    String
-  trailerVideo String
-  type        String
-  createdAt   DateTime     @default(now())
-
-  seasons     Season[]     // Relación con las temporadas
-}
-
-model Season {
-  id          String       @id @default(cuid())
-  number      Int          // Número de la temporada
-  serieId     String
-  serie       Serie        @relation(fields: [serieId], references: [id])
-  episodes    Episode[]    // Relación con los episodios
-}
-
-
-model Episode {
-  id          String       @id @default(cuid())
-  number      Int          // Número del episodio
-  title       String
-  duration    String       // Duración del episodio
-  videoUrl    String       // URL del video del episodio
-  seasonId    String
-  season      Season       @relation(fields: [seasonId], references: [id])
-}
-
-model Anime {
-  id           String        @id @default(cuid())
+  id           String    @id @default(cuid())
   title        String
-  description String
+  description  String
   thumbnailUrl String
   genre        String[]
   age          String
   duration     String
   trailerVideo String
-  type        String
-  createdAt    DateTime      @default(now())
+  type         String
+  createdAt    DateTime  @default(now())
+  seasons      Season[]
+}
 
-  seasons      AnimeSeason[] // Relación con las temporadas
+model Season {
+  id        String     @id @default(cuid())
+  number    Int
+  serieId   String
+  serie     Serie      @relation(fields: [serieId], references: [id])
+  episodes  Episode[]
+}
+
+model Episode {
+  id        String   @id @default(cuid())
+  number    Int
+  title     String
+  duration  String
+  servers   Json?
+  seasonId  String
+  season    Season   @relation(fields: [seasonId], references: [id])
+}
+
+model Anime {
+  id           String        @id @default(cuid())
+  title        String
+  description  String
+  thumbnailUrl String
+  genre        String[]
+  age          String
+  duration     String
+  trailerVideo String
+  type         String
+  createdAt    DateTime      @default(now())
+  seasons      AnimeSeason[]
 }
 
 model AnimeSeason {
-  id           String        @id @default(cuid())
-  number       Int           // Número de la temporada
-  animeId      String
-  anime        Anime         @relation(fields: [animeId], references: [id])
-  episodes     AnimeEpisode[] // Relación con los episodios
+  id        String         @id @default(cuid())
+  number    Int
+  animeId   String
+  anime     Anime          @relation(fields: [animeId], references: [id])
+  episodes  AnimeEpisode[]
 }
 
 model AnimeEpisode {
-  id           String        @id @default(cuid())
-  number       Int           // Número del episodio
-  title        String
-  duration     String        // Duración del episodio
-  videoUrl     String        // URL del video del episodio
-  animeSeasonId String
-  animeSeason  AnimeSeason   @relation(fields: [animeSeasonId], references: [id])
+  id             String   @id @default(cuid())
+  number         Int
+  title          String
+  duration       String
+  servers        Json?
+  animeSeasonId  String
+  animeSeason    AnimeSeason @relation(fields: [animeSeasonId], references: [id])
 }

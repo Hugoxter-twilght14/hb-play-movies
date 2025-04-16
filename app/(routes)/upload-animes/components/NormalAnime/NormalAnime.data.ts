@@ -2,10 +2,9 @@ export const dataAnime = [
   {
     title: "",
     description: "",
-    type:"",
-    thumbnailUrl:
-      "",
-    genre: [""],
+    type: "anime",
+    thumbnailUrl: "",
+    genre: ["", "", ""],
     age: "",
     duration: "",
     trailerVideo: "",
@@ -17,11 +16,27 @@ export const dataAnime = [
             number: 1,
             title: "",
             duration: "",
-            videoUrl: "",
+            servers: [
+              {
+                name: "Server 1",
+                url: "",
+              },
+              {
+                name: "Server 2",
+                url: "",
+              },
+              {
+                name: "Server 3",
+                url: "",
+              },
+              {
+                name: "Server 4",
+                url: "",
+              },
+            ],
           },
         ],
       },
     ],
   },
 ];
-  

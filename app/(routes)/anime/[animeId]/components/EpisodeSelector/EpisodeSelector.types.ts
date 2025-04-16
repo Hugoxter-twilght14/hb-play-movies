@@ -1,19 +1,25 @@
 // components/EpisodeSelector/EpisodeSelector.types.ts
 
-export interface Episode {
+export interface Server {
+    name: string;
+    url: string;
+  }
+  
+  export interface Episode {
     id: string;
     title: string;
     duration: string;
-    videoUrl: string;
-}
-
-export interface Season {
+    servers: Server[];
+  }
+  
+  export interface Season {
     id: string;
     number: number;
     episodes: Episode[];
-}
-
-export interface Anime {
+  }
+  
+  export interface Anime {
     title: string;
     seasons: Season[];
-}
+  }
+  

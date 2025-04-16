@@ -10,15 +10,15 @@ interface EpisodeSelectorProps {
 
 export function EpisodeSelector({ seasons }: EpisodeSelectorProps) {
   const [selectedSeason, setSelectedSeason] = useState<number | null>(null);
-  const [selectedEpisode, setSelectedEpisode] = useState<string | null>(null);
+  const [selectedEpisodeId, setSelectedEpisodeId] = useState<string | null>(null);
 
   const handleSeasonChange = (seasonNumber: number) => {
     setSelectedSeason(seasonNumber);
-    setSelectedEpisode(null);
+    setSelectedEpisodeId(null);
   };
 
-  const handleEpisodeChange = (episodeVideoUrl: string) => {
-    setSelectedEpisode((prev) => (prev === episodeVideoUrl ? null : episodeVideoUrl));
+  const handleEpisodeClick = (episodeId: string) => {
+    setSelectedEpisodeId((prev) => (prev === episodeId ? null : episodeId));
   };
 
   const selectedSeasonData = seasons.find((season) => season.number === selectedSeason);
@@ -47,26 +47,28 @@ export function EpisodeSelector({ seasons }: EpisodeSelectorProps) {
         </select>
       </div>
 
-      {/* Episodios mostrados en columna con render condicional del video */}
       {selectedSeasonData && (
         <div className="my-6">
-          <h2 className="text-xl font-bold mb-4">Episodios de la Temporada {selectedSeason}</h2>
+          <h2 className="text-xl font-bold mb-4">
+            Episodios de la Temporada {selectedSeason}
+          </h2>
           <div className="flex flex-col gap-4">
             {selectedSeasonData.episodes.map((episode) => (
               <div key={episode.id}>
                 <div
-                  onClick={() => handleEpisodeChange(episode.videoUrl)}
+                  onClick={() => handleEpisodeClick(episode.id)}
                   className="p-4 border rounded-lg cursor-pointer hover:shadow-lg bg-zinc-900"
                 >
                   <h3 className="font-bold">{episode.title}</h3>
                   <p>{episode.duration}</p>
                 </div>
 
-                {/* Reproductor*/}
-                {selectedEpisode === episode.videoUrl && (
+                {selectedEpisodeId === episode.id && (
                   <div className="mt-4 w-full max-w-[800px] mx-auto">
-                    <h3 className="text-lg font-semibold mb-2 text-center">Reproduciendo:</h3>
-                    <MovieVideo currentMovie={episode.videoUrl} />
+                    <h3 className="text-lg font-semibold mb-2 text-center">
+                      Reproduciendo:
+                    </h3>
+                    <MovieVideo servers={episode.servers} />
                   </div>
                 )}
               </div>

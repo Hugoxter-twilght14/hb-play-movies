@@ -20,22 +20,20 @@ export function MovieDetail({ movie }: MovieDetailProps) {
           />
         </div>
 
-        {/* Información de la película a la derecha */}
+        {/* Información de la película */}
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-3xl font-bold mb-2">{movie.title}</h1>
           <p className="text-sm text-gray-400 mt-4">Tipo: {movie.typePelicula}</p>
-          <p className="text-sm text-gray-400">Sipnosis: {movie.descriptionPelicula}</p>
+          <p className="text-sm text-gray-400">Sinopsis: {movie.descriptionPelicula}</p>
           <p className="text-sm text-gray-400">Duración: {movie.duration}</p>
           <p className="text-sm text-gray-400">Edad: {movie.age}+</p>
           <p className="text-sm text-gray-400">Género: {movie.genre.join(", ")}</p>
         </div>
 
-        {/* Tráiler de la película */}
+        {/* Tráiler */}
         {movie.trailerVideo && (
           <div className="w-full md:w-1/3 mt-4 md:mt-0 md:ml-1 transform md:translate-x-[-10px]">
-            <h2 className="text-lg font-semibold mb-2 text-center lg:text-left">
-              Tráiler
-            </h2>
+            <h2 className="text-lg font-semibold mb-2 text-center lg:text-left">Tráiler</h2>
             <video controls className="w-full rounded-lg">
               <source src={movie.trailerVideo} type="video/mp4" />
               Tu navegador no soporta la reproducción de video.
@@ -44,12 +42,10 @@ export function MovieDetail({ movie }: MovieDetailProps) {
         )}
       </div>
 
-      {/* Video principal de la película */}
-      <div className="mt-8">
-        <h3 className="text-2xl font-semibold mb-4">Ver Película</h3>
-        <div className="w-full max-w-[900px] aspect-video mx-auto rounded-lg shadow-md">
-          <MovieVideo currentMovie={movie.movieVidieo} />
-        </div>
+      {/* Reproductor */}
+      <div className="mt-8 text-center">
+        <h3 className="text-2xl font-semibold mb-4 text-white">Ver Película</h3>
+        <MovieVideo servers={movie.servers} />
       </div>
     </div>
   );

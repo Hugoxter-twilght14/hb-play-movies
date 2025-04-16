@@ -1,23 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { Anime } from "./EpisodeSelector.types";
+import { Anime, Episode } from "./EpisodeSelector.types";
 import { AnimeVideo } from "../AnimeVideo";
 
 export function EpisodeSelector({ anime }: { anime: Anime }) {
   const [selectedSeason, setSelectedSeason] = useState<number | null>(null);
-  const [selectedEpisode, setSelectedEpisode] = useState<string | null>(null);
+  const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(null);
 
   const handleSeasonChange = (seasonNumber: number) => {
     setSelectedSeason(seasonNumber);
     setSelectedEpisode(null);
   };
 
-  const handleEpisodeChange = (videoUrl: string) => {
-    setSelectedEpisode((prev) => (prev === videoUrl ? null : videoUrl));
+  const handleEpisodeChange = (episode: Episode) => {
+    setSelectedEpisode((prev) => (prev?.id === episode.id ? null : episode));
   };
 
-  const selectedSeasonData = anime.seasons.find((s) => s.number === selectedSeason);
+  const selectedSeasonData = anime.seasons.find(
+    (s) => s.number === selectedSeason
+  );
 
   return (
     <div>
@@ -54,19 +56,26 @@ export function EpisodeSelector({ anime }: { anime: Anime }) {
             {selectedSeasonData.episodes.map((episode) => (
               <div key={episode.id}>
                 <div
-                  onClick={() => handleEpisodeChange(episode.videoUrl)}
+                  onClick={() => handleEpisodeChange(episode)}
                   className="p-4 border border-gray-600 rounded-lg cursor-pointer hover:bg-gray-700"
                 >
                   <h3 className="font-bold text-white">{episode.title}</h3>
                   <p className="text-gray-400">{episode.duration}</p>
                 </div>
 
-                {selectedEpisode === episode.videoUrl && (
-                  <div className="mt-4 w-full max-w-[800px] mx-auto">
+                {/* Mostrar video solo si se seleccionó */}
+                {selectedEpisode?.id === episode.id && (
+                  <div className="mt-4 w-full max-w-[900px] mx-auto">
                     <h3 className="text-lg font-semibold text-white text-center mb-2">
                       Reproduciendo:
                     </h3>
-                    <AnimeVideo currentAnime={episode.videoUrl} />
+                    {episode.servers?.length > 0 ? (
+                      <AnimeVideo servers={episode.servers} />
+                    ) : (
+                      <p className="text-center text-gray-400">
+                        No hay servidores disponibles para este episodio.
+                      </p>
+                    )}
                   </div>
                 )}
               </div>

@@ -4,10 +4,23 @@ export const dataMovies = [
     typePelicula: "Pelicula",
     descriptionPelicula: "",
     trailerVideo: "",
-    movieVideo: "",
     thumbnailUrl: "",
-    genre: ["", "", "", ""],
+    genre: ["", "","", ""],
     duration: "",
     age: "",
+    servers: [
+      {
+        name: "Server 1",
+        url: "",
+      },
+      {
+        name: "Server 2",
+        url: "",
+      },
+      {
+        name: "Server 3",
+        url: "",
+      },
+    ],
   },
 ];

@@ -19,44 +19,19 @@ export async function POST(req: Request) {
           age,
           duration,
           trailerVideo,
-          description, // Nuevo campo description
-          type, // Nuevo campo type
+          description,
+          type,
           seasons,
         } = serie;
 
-        // Verificar que los campos obligatorios estén presentes, incluyendo los nuevos campos
-        if (
-          !title ||
-          !thumbnailUrl ||
-          !genre ||
-          !age ||
-          !duration ||
-          !trailerVideo ||
-          !description || // Validación de description
-          !type // Validación de type
-        ) {
-          throw new Error(`Faltan datos para crear la serie: ${title}`);
-        }
-
-        // Validación para seasons y episodes
         const validatedSeasons = Array.isArray(seasons)
           ? seasons.map((season) => {
-              if (!season.number || !Array.isArray(season.episodes)) {
-                throw new Error(`Datos incompletos para la temporada: ${season.number}`);
-              }
-
-              const validatedEpisodes = season.episodes.map((episode: Prisma.EpisodeCreateInput) => {
-                if (!episode.number || !episode.title || !episode.duration || !episode.videoUrl) {
-                  throw new Error(`Datos incompletos para el episodio: ${episode.title}`);
-                }
-
-                return {
-                  number: episode.number,
-                  title: episode.title,
-                  duration: episode.duration,
-                  videoUrl: episode.videoUrl,
-                };
-              });
+              const validatedEpisodes = season.episodes.map((ep: any) => ({
+                number: ep.number,
+                title: ep.title,
+                duration: ep.duration,
+                servers: ep.servers,
+              }));
 
               return {
                 number: season.number,
@@ -67,8 +42,7 @@ export async function POST(req: Request) {
             })
           : [];
 
-        // Crear la serie con temporadas y episodios, incluyendo los nuevos campos
-        return await db.serie.create({
+        return db.serie.create({
           data: {
             title,
             thumbnailUrl,
@@ -76,8 +50,8 @@ export async function POST(req: Request) {
             age,
             duration,
             trailerVideo,
-            description, // Guardar description
-            type, // Guardar type
+            description,
+            type,
             seasons: {
               create: validatedSeasons,
             },
@@ -86,10 +60,9 @@ export async function POST(req: Request) {
       })
     );
 
-    // Responder con las series creadas
     return NextResponse.json(createdSeries, { status: 201 });
   } catch (error) {
-    console.error("Error al crear las series:", error);
+    console.error("Error al crear series:", error);
     return new NextResponse("Internal server error", { status: 500 });
   }
 }

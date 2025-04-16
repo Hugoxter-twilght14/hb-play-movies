@@ -1,13 +1,19 @@
-export interface Episode {
+export interface Server {
+    name: string;
+    url: string;
+  }
+  
+  export interface Episode {
     id: string;
     number: number;
     title: string;
     duration: string;
-    videoUrl: string;
-}
-
-export interface Season {
+    servers: Server[];
+  }
+  
+  export interface Season {
     id: string;
     number: number;
     episodes: Episode[];
-}
+  }
+  
