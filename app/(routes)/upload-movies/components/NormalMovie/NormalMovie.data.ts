@@ -1,25 +1,25 @@
 export const dataMovies = [
   {
-    title: "prueba final",
+    title: "",
     typePelicula: "Pelicula",
-    descriptionPelicula: "pruebas",
+    descriptionPelicula: "",
     trailerVideo: "",
-    thumbnailUrl: "https://raw.githubusercontent.com/Hugoxter-twilght14/images-for-playMovies/refs/heads/main/Series-images/Invencible-1.jpg",
-    genre: ["ssdf", "ad","asa", "ewr"],
-    duration: "1hr 40 min",
-    age: "14",
+    thumbnailUrl: "",
+    genre: ["", "","", ""],
+    duration: "",
+    age: "",
     servers: [
       {
         name: "Server 1",
-        url: "https://www.yourupload.com/embed/rrBs7aoJO43O",
+        url: "",
       },
       {
         name: "Server 2",
-        url: "wrwr",
+        url: "",
       },
       {
         name: "Server 3",
-        url: "https://www.yourupload.com/embed/rrBs7aoJO43O",
+        url: "",
       },
     ],
   },
