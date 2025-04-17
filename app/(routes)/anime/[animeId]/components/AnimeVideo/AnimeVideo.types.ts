@@ -1,8 +1,8 @@
-interface Server {
+export interface Server {
     name: string;
     url: string;
   }
   
-  interface AnimeVideoProps {
+  export interface AnimeVideoProps {
     servers?: Server[];
   }

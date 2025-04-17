@@ -1,18 +1,9 @@
 "use client";
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import { AnimeVideoProps, Server } from "./AnimeVideo.types";
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
-
-interface Server {
-  name: string;
-  url: string;
-}
-
-interface AnimeVideoProps {
-  servers?: Server[];
-}
-
 export function AnimeVideo({ servers = [] }: AnimeVideoProps) {
   const [activeServer, setActiveServer] = useState<Server | null>(
     servers.length > 0 ? servers[0] : null
