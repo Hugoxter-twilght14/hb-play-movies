@@ -2,39 +2,49 @@ import { db } from "@/lib/db";
 import { NavbarFilm } from "./components/series/NavbarFilm";
 import { EpisodeSelector } from "./components/series/EpisodeSelector";
 import SerieInfo from "./components/SerieInfo/SerieInfo";
+import { Server } from "./components/series/MovieVideo/MovieVideo.types"; // Asegúrate de que este tipo exista
 
 export default async function Page({ params }: { params: { serieId: string } }) {
-    // Obtener la serie con temporadas, episodios y los nuevos campos description y type desde la base de datos
-    const serie = await db.serie.findUnique({
-        where: { id: params.serieId },
-        include: { 
-            seasons: { include: { episodes: true } } 
+  const serie = await db.serie.findUnique({
+    where: { id: params.serieId },
+    include: {
+      seasons: {
+        include: {
+          episodes: true,
         },
-    });
+      },
+    },
+  });
 
-    // Mostrar mensaje si la serie no existe
-    if (!serie) {
-        return <div>Serie no encontrada</div>;
-    }
+  if (!serie) {
+    return <div>Serie no encontrada</div>;
+  }
 
-    return (
-        <div className="pt-2 sm:pt-6 lg:pt-10 pb-8 sm:pb-16 lg:items-center lg:pb-20">
-            {/* Navbar con el título de la serie */}
-            <NavbarFilm title={serie.title} />
+  // ✅ Convertir todos los servers de JsonValue a Server[]
+  const parsedSeasons = serie.seasons.map((season) => ({
+    ...season,
+    episodes: season.episodes.map((episode) => ({
+      ...episode,
+      servers: (episode.servers ?? []) as unknown as Server[],
+    })),
+  }));
 
-            <SerieInfo
-                title={serie.title}
-                thumbnailUrl={serie.thumbnailUrl}
-                genre={serie.genre}
-                age={serie.age}
-                duration={serie.duration}
-                trailerVideo={serie.trailerVideo}
-                description={serie.description}
-                type={serie.type}
-            />
-            
-            {/* Selector de temporadas y episodios */}
-            <EpisodeSelector seasons={serie.seasons} />
-        </div>
-    );
+  return (
+    <div className="pt-2 sm:pt-6 lg:pt-10 pb-8 sm:pb-16 lg:items-center lg:pb-20">
+      <NavbarFilm title={serie.title} />
+
+      <SerieInfo
+        title={serie.title}
+        thumbnailUrl={serie.thumbnailUrl}
+        genre={serie.genre}
+        age={serie.age}
+        duration={serie.duration}
+        trailerVideo={serie.trailerVideo}
+        description={serie.description}
+        type={serie.type}
+      />
+
+      <EpisodeSelector seasons={parsedSeasons} />
+    </div>
+  );
 }

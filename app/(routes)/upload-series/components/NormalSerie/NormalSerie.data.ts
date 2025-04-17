@@ -1,13 +1,13 @@
 export const dataSeries = [
   {
     title: "Castlevania",
-    description: "",
+    description: "pruebas pruebas",
     type: "anime",
-    thumbnailUrl: "https://raw.githubusercontent.com/Hugoxter-twilght14/images-for-playMovies/refs/heads/main/anime-images/CastleV4n1a-1.jpeg",
+    thumbnailUrl: "https://raw.githubusercontent.com/Hugoxter-twilght14/images-for-playMovies/refs/heads/main/Series-images/Invencible-1.jpg",
     genre: ["Gore", "Accion","Drama","Sobrenatural",],
     age: "+16",
     duration: "4 temporadas",
-    trailerVideo: "",
+    trailerVideo: "https://www.dropbox.com/scl/fi/ykyj8xqvlt6w5w06twh4b/Sakamoto-Days08.mp4?rlkey=xovzzdcmav3m602hof6wmkaox&st=bor3b2bz&dl=0",
     seasons: [
       {
         number: 1,

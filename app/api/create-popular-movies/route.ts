@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { Prisma } from "@prisma/client";
 
 export async function POST(req: Request) {
   const { movies } = await req.json();
@@ -14,7 +15,7 @@ export async function POST(req: Request) {
         const {
           title,
           ranking,
-          servers, // <--- ahora se espera un arreglo de servidores
+          servers,
           trailerVideo,
           thumbnailUrl,
           genre,
@@ -25,8 +26,8 @@ export async function POST(req: Request) {
         } = movie;
 
         if (
-          !title || !ranking || !servers || !Array.isArray(servers) || servers.length === 0 ||
-          !trailerVideo || !thumbnailUrl || !genre || !duration || !age || !descriptionPelicula || !typePelicula
+          !title || !ranking || !trailerVideo || !thumbnailUrl || !genre ||
+          !duration || !age || !descriptionPelicula || !typePelicula
         ) {
           throw new Error(`Faltan datos para subir la película popular: ${title}`);
         }
@@ -40,7 +41,7 @@ export async function POST(req: Request) {
             age,
             duration,
             trailerVideo,
-            servers, // <--- se guarda como JSON
+            servers: servers ?? Prisma.JsonNull, // ✅ Aquí está la corrección segura
             descriptionPelicula,
             typePelicula,
           },

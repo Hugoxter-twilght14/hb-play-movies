@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { Prisma } from "@prisma/client"; // ✅ Asegúrate de importar Prisma
 
 export async function POST(req: Request) {
   try {
@@ -33,7 +34,7 @@ export async function POST(req: Request) {
             trailerVideo,
             typePelicula,
             descriptionPelicula,
-            servers,
+            servers: servers ?? Prisma.JsonNull, // ✅ Esta es la corrección
             createdAt: new Date(),
           },
         });
