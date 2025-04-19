@@ -18,6 +18,7 @@ model UserAdmin {
   nombre    String
   correo    String   @unique
   password  String
+  avatarUri String?
   createdAt DateTime @default(now())
 }
 
