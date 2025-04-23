@@ -15,7 +15,7 @@ interface Anime {
   age: string;
   duration: string;
   description?: string;
-  isMoreCard?: boolean; // <--- agregado
+  isMoreCard?: boolean;
 }
 
 interface Props {
@@ -25,12 +25,12 @@ interface Props {
 export function CarouselAnime({ animes }: Props) {
   return (
     <Carousel className="w-full">
-        <CarouselContent className="ml-1 gap-2 overflow-x-scroll overflow-y-hidden scrollbar-hide">
+      <CarouselContent className="flex gap-2 overflow-x-auto overflow-y-hidden scrollbar-hide px-1">
         {animes.map((anime) =>
           anime.isMoreCard ? (
             <CarouselItem
               key="ver-mas"
-              className="pl-1 md:basis-1/2 lg:basis-1/5 transition group relative"
+              className="basis-[45%] sm:basis-[35%] md:basis-1/4 lg:basis-1/5 xl:basis-1/6 transition group relative"
             >
               <Link href="/animes">
                 <div className="relative aspect-[2/3] bg-gradient-to-br from-slate-800 to-slate-900 rounded-md flex items-center justify-center text-white font-bold text-center text-lg hover:scale-105 transition-transform">
@@ -41,7 +41,7 @@ export function CarouselAnime({ animes }: Props) {
           ) : (
             <CarouselItem
               key={anime.id}
-              className="pl-1 md:basis-1/2 lg:basis-1/5 transition delay-300 group relative"
+              className="basis-[45%] sm:basis-[35%] md:basis-1/4 lg:basis-1/5 xl:basis-1/6 transition delay-300 group relative"
             >
               <div className="relative aspect-[2/3] bg-zinc-900 rounded-md overflow-hidden group cursor-pointer">
                 <Image

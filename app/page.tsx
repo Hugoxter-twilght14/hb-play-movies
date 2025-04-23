@@ -46,15 +46,13 @@ export default async function Home() {
       <SliderVideo />
       <TrendingMovies movies={trendingMovies} />
 
-      {/* ✅ Nuevas secciones */}
-      <div className="px-[4%] mt-10">
+      <div className="px-[4%] mt-20 space-y-20 md:space-y-0">
         <ListMovies movies={movies} />
 
         <BlockSeries title="Series recien añadidas" series={series} />
 
         <BlockAnimes title="Animes Recien añadidos" animes={animes} />
       </div>
-
     </div>
   );
 }
