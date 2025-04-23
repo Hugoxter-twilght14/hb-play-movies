@@ -10,11 +10,10 @@ export function SliderVideo() {
         className="relative flex flex-col items-center text-center px-4 md:px-0 w-full md:w-[50%] z-20"
       >
         <h2 className="text-2xl md:text-5xl lg:text-7xl font-bold mb-4 uppercase underline text-[#0B614B]">
-          Ultmas novedades
+          Acerca de
         </h2>
         <p className="text-sm md:text-base lg:text-lg max-w-lg mb-6 uppercase text-[#0B614B] font-semibold">
-          Las ultimas y mas recientes peliculas y series, aqui encontraras
-          las series y peliculas del momento y las recien llegadas a nuestro catálogo.
+          Esta sección contiene información sobre HBStudios y playMovies
         </p>
       </div>
       <div

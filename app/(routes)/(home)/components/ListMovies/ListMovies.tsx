@@ -15,7 +15,7 @@ export function ListMovies(props: ListMoviesProps) {
 
   return (
     <div className="mt-16 sm:mt-[110px] md:mt-[40px]"> {/* Solo aplica en tablets y teléfonos */}
-      <BlockMovies title="Recien Agregadas" 
+      <BlockMovies title="Peliculas Recien añadidas" 
       movies={movies} 
       isMyList={false}/>
 

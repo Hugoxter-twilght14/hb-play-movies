@@ -18,7 +18,7 @@ export const itemsNavbar =[
         link: "/animes",
     },
     {
-        name: "Novedades",
-        link: "/novedades",
+        name: "Acerca De",
+        link: "/acerca-de",
     },
 ];

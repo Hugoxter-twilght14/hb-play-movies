@@ -81,4 +81,14 @@ html, body, :root{
   body {
     @apply bg-background text-white;
   }
+
+  /* globals.css */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 }
