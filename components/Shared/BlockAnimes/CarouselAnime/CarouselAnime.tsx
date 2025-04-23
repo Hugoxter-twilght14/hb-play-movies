@@ -25,10 +25,10 @@ interface Props {
 export function CarouselAnime({ animes }: Props) {
   return (
     <Carousel className="w-full">
-      <CarouselContent className="flex flex-nowrap gap-2 overflow-x-auto overflow-y-hidden scrollbar-hide px-2 touch-pan-x">
+      <CarouselContent className="flex flex-nowrap gap-3 overflow-x-auto overflow-y-hidden scrollbar-hide px-2 touch-pan-x w-full">
         {animes.map((anime) => (
           <CarouselItem
-            key={anime.id}
+            key={anime.isMoreCard ? "ver-mas" : anime.id}
             className="flex-none w-[45%] sm:w-[35%] md:w-[25%] lg:w-[20%] xl:w-[16.6%] group relative transition"
           >
             <div className="relative aspect-[2/3] bg-zinc-900 rounded-md overflow-hidden cursor-pointer group-hover:scale-105 transition-transform duration-300">
@@ -47,9 +47,13 @@ export function CarouselAnime({ animes }: Props) {
                     className="object-cover"
                   />
                   <div className="absolute top-0 left-0 w-full h-full bg-zinc-900/90 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 z-10">
-                    <h4 className="text-white font-semibold text-sm truncate mb-1">{anime.title}</h4>
+                    <h4 className="text-white font-semibold text-sm truncate mb-1">
+                      {anime.title}
+                    </h4>
                     {anime.description && (
-                      <p className="text-gray-300 text-xs mb-2 line-clamp-3">{anime.description}</p>
+                      <p className="text-gray-300 text-xs mb-2 line-clamp-3">
+                        {anime.description}
+                      </p>
                     )}
                     <ActionsButtons
                       filmId={anime.id}
@@ -57,7 +61,11 @@ export function CarouselAnime({ animes }: Props) {
                       type="anime"
                       isMyList={false}
                     />
-                    <ChaptersInfo title={anime.title} age={anime.age} duration={anime.duration} />
+                    <ChaptersInfo
+                      title={anime.title}
+                      age={anime.age}
+                      duration={anime.duration}
+                    />
                     <FilmGenres genres={anime.genre} />
                   </div>
                 </>

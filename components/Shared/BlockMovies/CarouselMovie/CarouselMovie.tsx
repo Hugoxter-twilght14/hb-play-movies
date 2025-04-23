@@ -11,7 +11,7 @@ import { CarouselMovieProps } from "./CarouselMovie.types";
 export function CarouselMovie({ movies }: CarouselMovieProps) {
   return (
     <Carousel className="w-full">
-      <CarouselContent className="flex flex-nowrap gap-2 overflow-x-auto overflow-y-hidden scrollbar-hide px-2 touch-pan-x">
+      <CarouselContent className="flex flex-nowrap gap-3 overflow-x-auto overflow-y-hidden scrollbar-hide px-2 touch-pan-x w-full">
         {movies.map((movie) => (
           <CarouselItem
             key={movie.isMoreCard ? "ver-mas" : movie.id}
@@ -40,7 +40,11 @@ export function CarouselMovie({ movies }: CarouselMovieProps) {
                       {movie.descriptionPelicula}
                     </p>
                     <ActionsButtonsFilm title={movie.title} idFilm={movie.id} />
-                    <ChaptersInfo title={movie.title} age={movie.age} duration={movie.duration} />
+                    <ChaptersInfo
+                      title={movie.title}
+                      age={movie.age}
+                      duration={movie.duration}
+                    />
                     <FilmGenres genres={movie.genre} />
                   </div>
                 </>

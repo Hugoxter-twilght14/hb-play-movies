@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { ActionsButtons } from "@/components/Shared/ActionButtons";
 import { ChaptersInfo } from "@/components/Shared/ChaptersInfo";
 import { FilmGenres } from "@/components/Shared/FilmGenres";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 interface Serie {
   id: string;
@@ -25,7 +25,7 @@ interface Props {
 export function CarouselSerie({ series }: Props) {
   return (
     <Carousel className="w-full">
-      <CarouselContent className="flex flex-nowrap gap-2 overflow-x-auto overflow-y-hidden scrollbar-hide px-2 touch-pan-x">
+      <CarouselContent className="flex flex-nowrap gap-3 overflow-x-auto overflow-y-hidden scrollbar-hide px-2 touch-pan-x w-full">
         {series.map((serie) => (
           <CarouselItem
             key={serie.isMoreCard ? "ver-mas" : serie.id}
@@ -51,7 +51,9 @@ export function CarouselSerie({ series }: Props) {
                       {serie.title}
                     </h4>
                     {serie.description && (
-                      <p className="text-gray-300 text-xs mb-2 line-clamp-3">{serie.description}</p>
+                      <p className="text-gray-300 text-xs mb-2 line-clamp-3">
+                        {serie.description}
+                      </p>
                     )}
                     <ActionsButtons
                       filmId={serie.id}
@@ -59,7 +61,11 @@ export function CarouselSerie({ series }: Props) {
                       type="serie"
                       isMyList={false}
                     />
-                    <ChaptersInfo title={serie.title} age={serie.age} duration={serie.duration} />
+                    <ChaptersInfo
+                      title={serie.title}
+                      age={serie.age}
+                      duration={serie.duration}
+                    />
                     <FilmGenres genres={serie.genre} />
                   </div>
                 </>

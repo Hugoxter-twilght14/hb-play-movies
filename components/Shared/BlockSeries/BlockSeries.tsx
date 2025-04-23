@@ -11,7 +11,7 @@ export function BlockSeries({ title, series }: BlockSeriesProps) {
     {
       id: "ver-mas",
       title: "Ver más",
-      thumbnailUrl: "/img/ver-mas-series.jpg", // Asegúrate que esta imagen exista
+      thumbnailUrl: "/img/ver-mas-series.jpg", // ✔️ Asegúrate de tener esta imagen
       genre: [],
       age: "",
       duration: "",
@@ -20,7 +20,7 @@ export function BlockSeries({ title, series }: BlockSeriesProps) {
   ];
 
   return (
-    <div className="-top-16 relative px-[4%] md:pt-20 md:pd-20 overflow-auto bg-[#171717]">
+    <div className="relative px-[4%] md:pt-20 overflow-auto bg-[#171717]">
       <h3 className="text-2xl font-bold text-white mb-3">{title}</h3>
       <CarouselSerie series={extendedSeries} />
     </div>
