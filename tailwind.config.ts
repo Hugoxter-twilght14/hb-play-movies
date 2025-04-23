@@ -7,6 +7,17 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: [
+    'basis-[45%]',
+    'sm:basis-[35%]',
+    'md:basis-1/4',
+    'lg:basis-1/5',
+    'xl:basis-1/6',
+    'scrollbar-hide',
+    'overflow-x-auto',
+    'overflow-y-hidden',
+    'touch-pan-x',
+  ],
   theme: {
   	extend: {
   		colors: {
