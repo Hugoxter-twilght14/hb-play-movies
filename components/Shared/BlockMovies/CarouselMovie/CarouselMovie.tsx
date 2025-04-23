@@ -11,7 +11,7 @@ import { CarouselMovieProps } from "./CarouselMovie.types";
 export function CarouselMovie({ movies }: CarouselMovieProps) {
   return (
     <Carousel className="w-full">
-      <CarouselContent className="flex gap-2 overflow-x-auto overflow-y-hidden scrollbar-hide px-1">
+      <CarouselContent className="flex gap-2 overflow-x-auto overflow-y-hidden scrollbar-hide px-1 w-screen max-w-full touch-pan-x">
         {movies.map((movie) =>
           movie.isMoreCard ? (
             <CarouselItem

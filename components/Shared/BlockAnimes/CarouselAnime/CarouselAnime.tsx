@@ -25,7 +25,7 @@ interface Props {
 export function CarouselAnime({ animes }: Props) {
   return (
     <Carousel className="w-full">
-      <CarouselContent className="flex gap-2 overflow-x-auto overflow-y-hidden scrollbar-hide px-1">
+      <CarouselContent className="flex gap-2 overflow-x-auto overflow-y-hidden scrollbar-hide px-1 w-screen max-w-full touch-pan-x">
         {animes.map((anime) =>
           anime.isMoreCard ? (
             <CarouselItem
