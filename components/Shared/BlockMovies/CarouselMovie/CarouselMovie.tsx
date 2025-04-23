@@ -11,47 +11,43 @@ import { CarouselMovieProps } from "./CarouselMovie.types";
 export function CarouselMovie({ movies }: CarouselMovieProps) {
   return (
     <Carousel className="w-full">
-      <CarouselContent className="flex gap-2 overflow-x-auto overflow-y-hidden scrollbar-hide px-1 w-screen max-w-full touch-pan-x">
-        {movies.map((movie) =>
-          movie.isMoreCard ? (
-            <CarouselItem
-              key="ver-mas"
-              className="basis-[45%] sm:basis-[35%] md:basis-1/4 lg:basis-1/5 xl:basis-1/6 transition group relative"
-            >
-              <Link href="/peliculas">
-                <div className="relative aspect-[2/3] bg-gradient-to-br from-slate-800 to-slate-900 rounded-md flex items-center justify-center text-white font-bold text-center text-lg hover:scale-105 transition-transform">
-                  Ver más
-                </div>
-              </Link>
-            </CarouselItem>
-          ) : (
-            <CarouselItem
-              key={movie.id}
-              className="basis-[45%] sm:basis-[35%] md:basis-1/4 lg:basis-1/5 xl:basis-1/6 transition delay-300 group relative"
-            >
-              <div className="relative aspect-[2/3] bg-zinc-900 rounded-md overflow-hidden group cursor-pointer">
-                <Image
-                  src={movie.thumbnailUrl}
-                  alt={movie.title}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-
-                <div className="absolute top-0 left-0 w-full h-full bg-zinc-900/90 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 z-10">
-                  <h4 className="text-white font-semibold text-sm truncate mb-1">{movie.title}</h4>
-
-                  <p className="text-slate-300 text-xs mb-2 line-clamp-2">
-                    {movie.descriptionPelicula}
-                  </p>
-
-                  <ActionsButtonsFilm title={movie.title} idFilm={movie.id} />
-                  <ChaptersInfo title={movie.title} age={movie.age} duration={movie.duration} />
-                  <FilmGenres genres={movie.genre} />
-                </div>
-              </div>
-            </CarouselItem>
-          )
-        )}
+      <CarouselContent className="flex flex-nowrap gap-2 overflow-x-auto overflow-y-hidden scrollbar-hide px-2 touch-pan-x">
+        {movies.map((movie) => (
+          <CarouselItem
+            key={movie.isMoreCard ? "ver-mas" : movie.id}
+            className="flex-none w-[45%] sm:w-[35%] md:w-[25%] lg:w-[20%] xl:w-[16.6%] group relative transition"
+          >
+            <div className="relative aspect-[2/3] bg-zinc-900 rounded-md overflow-hidden cursor-pointer group-hover:scale-105 transition-transform duration-300">
+              {movie.isMoreCard ? (
+                <Link href="/peliculas">
+                  <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-center text-lg bg-gradient-to-br from-slate-800 to-slate-900">
+                    Ver más
+                  </div>
+                </Link>
+              ) : (
+                <>
+                  <Image
+                    src={movie.thumbnailUrl}
+                    alt={movie.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute top-0 left-0 w-full h-full bg-zinc-900/90 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 z-10">
+                    <h4 className="text-white font-semibold text-sm truncate mb-1">
+                      {movie.title}
+                    </h4>
+                    <p className="text-slate-300 text-xs mb-2 line-clamp-2">
+                      {movie.descriptionPelicula}
+                    </p>
+                    <ActionsButtonsFilm title={movie.title} idFilm={movie.id} />
+                    <ChaptersInfo title={movie.title} age={movie.age} duration={movie.duration} />
+                    <FilmGenres genres={movie.genre} />
+                  </div>
+                </>
+              )}
+            </div>
+          </CarouselItem>
+        ))}
       </CarouselContent>
     </Carousel>
   );
