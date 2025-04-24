@@ -12,11 +12,11 @@ export function CarouselMovie({ movies }: CarouselMovieProps) {
   return (
     <div className="w-full overflow-x-auto">
       <Carousel>
-        <CarouselContent className="flex gap-3 px-2 touch-pan-x overflow-x-auto overflow-y-hidden scrollbar-hide">
+        <CarouselContent className="flex gap-3 px-2 pr-4 touch-pan-x overflow-x-auto overflow-y-hidden scrollbar-hide">
           {movies.map((movie) => (
             <CarouselItem
               key={movie.isMoreCard ? "ver-mas" : movie.id}
-              className="min-w-[45%] sm:min-w-[35%] md:min-w-[25%] lg:min-w-[20%] xl:min-w-[16.6%] flex-none group relative transition"
+              className="min-w-[80%] sm:min-w-[50%] md:min-w-[33%] lg:min-w-[25%] xl:min-w-[16.6%] flex-none group relative transition"
             >
               <div className="relative aspect-[2/3] bg-zinc-900 rounded-md overflow-hidden cursor-pointer group-hover:scale-105 transition-transform duration-300">
                 {movie.isMoreCard ? (
