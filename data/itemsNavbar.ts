@@ -18,6 +18,10 @@ export const itemsNavbar =[
         link: "/animes",
     },
     {
+        name: "Mis Listas",
+        link: "/mis-listas",
+    },
+    {
         name: "Acerca De",
         link: "/acerca-de",
     },

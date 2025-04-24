@@ -38,7 +38,9 @@ export default function NavbarMobile(props: NavbarMobileProps) {
      {/*Creación de iconos search y notifications de la barra de navegación de PC a telefono */}
    <div className="border-[1px] border-white/70 my-5"/>
    <div className="flex justify-between gap-6 mt-4">
-    <Search className="cursor-pointer hover:text-[#00FFFF]"/>
+   <Link href="/buscador">
+      <Search className="cursor-pointer hover:text-blue-500 transition-colors" />
+    </Link>
     <BellRing className="cursor-pointer  hover:text-[#00FFFF]"/>
     
     <SelectorProfile users={users}/>

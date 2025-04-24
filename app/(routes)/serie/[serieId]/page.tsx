@@ -1,26 +1,37 @@
 import { db } from "@/lib/db";
+import { redirect } from "next/navigation";
 import { NavbarFilm } from "./components/series/NavbarFilm";
 import { EpisodeSelector } from "./components/series/EpisodeSelector";
 import SerieInfo from "./components/SerieInfo/SerieInfo";
-import { Server } from "./components/series/MovieVideo/MovieVideo.types"; // Asegúrate de que este tipo exista
+import { Server } from "./components/series/MovieVideo/MovieVideo.types";
 
-export default async function Page({ params }: { params: { serieId: string } }) {
-  const serie = await db.serie.findUnique({
-    where: { id: params.serieId },
-    include: {
-      seasons: {
-        include: {
-          episodes: true,
-        },
-      },
-    },
-  });
-
-  if (!serie) {
-    return <div>Serie no encontrada</div>;
+export default async function Page({ params }: { params: { serieId?: string } }) {
+  // ✅ Validación defensiva
+  if (!params?.serieId || typeof params.serieId !== "string" || params.serieId.trim() === "") {
+    redirect("/series"); // Redirige en vez de renderizar un error suelto
   }
 
-  // ✅ Convertir todos los servers de JsonValue a Server[]
+  let serie = null;
+
+  try {
+    serie = await db.serie.findUnique({
+      where: { id: params.serieId },
+      include: {
+        seasons: {
+          include: { episodes: true },
+        },
+      },
+    });
+  } catch (error) {
+    console.error("❌ Error al cargar la serie:", error);
+    redirect("/");
+  }
+
+  if (!serie) {
+    redirect("/");
+  }
+
+  // ✅ Conversión segura de episodios
   const parsedSeasons = serie.seasons.map((season) => ({
     ...season,
     episodes: season.episodes.map((episode) => ({

@@ -33,7 +33,9 @@ export function NavbarDesktop(props: NavbarDesktopProps) {
               </div>
             </div>
             <div className="flex gap-4 items-center">
-              <Search className="cursor-pointer"/>
+              <Link href="/buscador">
+                <Search className="cursor-pointer hover:text-blue-500 transition-colors" />
+              </Link>
               <BellRing className="cursor-pointer"/>
               <div className="flex gap-2 items-center">
                 <SelectorProfile users={users}/>
