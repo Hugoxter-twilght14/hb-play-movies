@@ -82,4 +82,13 @@ html, body, :root{
     @apply bg-background text-white;
   }
 
+  /* Oculta scroll horizontal y vertical */
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Safari & Chrome */
+}
+
 }
