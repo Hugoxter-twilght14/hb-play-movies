@@ -49,7 +49,7 @@ export function CarouselAnime({ animes }: Props) {
                       sizes="(max-width: 768px) 80vw, (max-width: 1200px) 33vw, 16vw"
                       className="object-cover"
                     />
-                    <div className="absolute top-0 left-0 w-full h-full bg-zinc-900/90 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 z-10">
+                    <div className="absolute top-0 left-0 w-full h-full bg-zinc-900/90 backdrop-blur-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 p-3 z-10">
                       <h4 className="text-white font-semibold text-sm truncate mb-1">
                         {anime.title}
                       </h4>
