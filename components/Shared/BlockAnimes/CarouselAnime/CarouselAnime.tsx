@@ -26,11 +26,11 @@ export function CarouselAnime({ animes }: Props) {
   return (
     <div className="w-full overflow-x-auto">
       <Carousel>
-        <CarouselContent className="flex gap-3 px-2 pr-4 touch-pan-x overflow-x-auto overflow-y-hidden scrollbar-hide">
+        <CarouselContent className="flex gap-3 px-2 pr-4 overflow-x-auto overflow-y-hidden touch-pan-x scrollbar-hide snap-x scroll-smooth">
           {animes.map((anime) => (
             <CarouselItem
               key={anime.isMoreCard ? "ver-mas" : anime.id}
-              className="w-[80%] sm:w-[50%] md:w-[33%] lg:w-[25%] xl:w-[16.6%] flex-none group relative transition"
+              className="snap-start w-[80%] sm:w-[50%] md:w-[33%] lg:w-[25%] xl:w-[16.6%] flex-none group relative transition will-change-transform"
             >
               <div className="relative aspect-[2/3] bg-zinc-900 rounded-md overflow-hidden cursor-pointer group-hover:scale-105 transition-transform duration-300">
                 {anime.isMoreCard ? (
@@ -45,6 +45,8 @@ export function CarouselAnime({ animes }: Props) {
                       src={anime.thumbnailUrl}
                       alt={anime.title}
                       fill
+                      priority
+                      sizes="(max-width: 768px) 80vw, (max-width: 1200px) 33vw, 16vw"
                       className="object-cover"
                     />
                     <div className="absolute top-0 left-0 w-full h-full bg-zinc-900/90 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 z-10">
