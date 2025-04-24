@@ -30,7 +30,7 @@ export function CarouselSerie({ series }: Props) {
           {series.map((serie) => (
             <CarouselItem
               key={serie.isMoreCard ? "ver-mas" : serie.id}
-              className="min-w-[80%] sm:min-w-[50%] md:min-w-[33%] lg:min-w-[25%] xl:min-w-[16.6%] flex-none group relative transition"
+              className="w-[80%] sm:w-[50%] md:w-[33%] lg:w-[25%] xl:w-[16.6%] flex-none group relative transition"
             >
               <div className="relative aspect-[2/3] bg-zinc-900 rounded-md overflow-hidden cursor-pointer group-hover:scale-105 transition-transform duration-300">
                 {serie.isMoreCard ? (
