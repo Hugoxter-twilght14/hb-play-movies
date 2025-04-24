@@ -38,14 +38,49 @@ export default async function Home() {
     take: 10,
   });
 
+  const animesRecientes = await db.anime.findMany({
+    orderBy: { createdAt: "desc" },
+    take: 3,
+  });
+
+  const seriesRecientes = await db.serie.findMany({
+    orderBy: { createdAt: "desc" },
+    take: 3,
+  });
+
+  const peliculasRecientes = await db.movie.findMany({
+    orderBy: { createdAt: "desc" },
+    take: 3,
+  });
+
+  const sliderContenido = [
+    ...animesRecientes.map((a) => ({
+      ...a,
+      type: "anime" as const,
+      description: a.description,
+    })),
+    ...seriesRecientes.map((s) => ({
+      ...s,
+      type: "serie" as const,
+      description: s.description,
+    })),
+    ...peliculasRecientes.map((p) => ({
+      ...p,
+      type: "pelicula" as const,
+      description: p.descriptionPelicula,
+    })),
+  ]
+  
+
+
   return (
     <div className="relative bg-zinc-900">
       <Navbar users={usersNetflix} />
-      <SliderVideo />
+      <SliderVideo contenido={sliderContenido} />
       <TrendingMovies movies={trendingMovies} />
 
       {/* ✅ Sección scroll-friendly y sin conflictos de anchura */}
-      <main className="w-full flex flex-col gap-20 px-[4%] mt-20">
+      <main className="w-full flex flex-col gap-2 px-[4%] mt-20">
         <ListMovies movies={movies} />
         <BlockSeries title="Series recien añadidas" series={series} />
         <BlockAnimes title="Animes Recien añadidos" animes={animes} />

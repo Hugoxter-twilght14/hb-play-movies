@@ -28,7 +28,7 @@ export function BlockMovies(props: BlockMoviesProps) {
   ];
 
   return (
-    <section className="w-full px-[4%] pt-8 md:pt-20 bg-[#171717]">
+    <section className="w-full px-[4%] pt-8 md:pt-[-10px] bg-[#171717]">
       <h3 className="text-2xl font-bold text-white mb-3">{title}</h3>
       <div className="w-full overflow-x-auto">
         <CarouselMovie movies={extendedMovies} isMyList={isMyList} />

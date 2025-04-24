@@ -9,6 +9,9 @@ export interface MovieDetailProps {
     title: string;
     thumbnailUrl: string;
     genre: string[];
+    actores?: string | null;
+    audio?: string | null;
+    anio?: number | null;
     age: string;
     duration: string;
     trailerVideo: string;
@@ -17,3 +20,4 @@ export interface MovieDetailProps {
     servers: Server[];
   };
 }
+

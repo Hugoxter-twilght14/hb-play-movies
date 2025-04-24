@@ -5,6 +5,8 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { BlockSeries } from "./components/BlockSeries";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const session = await auth();
   
@@ -26,10 +28,15 @@ export default async function Home() {
     },
   });
 
+  const seriesRecientes = await db.serie.findMany({
+    take: 6,
+    orderBy: { createdAt: "desc" },
+  });
+
   return (
     <div>
       <Navbar users={usersNetflix} />
-      <SliderVideo />
+      <SliderVideo series={seriesRecientes} />
       <BlockSeries series={series} /> {/* Pasa las series reales aquí */}
     </div>
   );

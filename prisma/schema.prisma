@@ -44,44 +44,87 @@ model UserNetflix{
   userId String
   User User @relation(fields: [userId], references: [id])
 
+  listas      Lista[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
 }
 
+model Lista {
+  id            String       @id @default(cuid())
+  nombre        String
+  descripcion   String?
+  creadaEn      DateTime     @default(now())
+
+  // Relación con perfil de usuario
+  perfilId      String
+  perfil        UserNetflix  @relation(fields: [perfilId], references: [id])
+
+  // Relación con contenido (intermedia)
+  contenidos    ListaContenido[]
+}
+
+model ListaContenido {
+  id        String   @id @default(cuid())
+  tipo      String   // "pelicula", "anime", "serie"
+  contenidoId String // ID del contenido (se usará como string genérico)
+  listaId   String
+  lista     Lista    @relation(fields: [listaId], references: [id])
+
+  agregadoEn DateTime @default(now())
+
+  @@unique([contenidoId, listaId]) // Para evitar duplicados en una lista
+}
+
+
 model Movie {
   id                    String   @id @default(cuid())
   title                 String
   thumbnailUrl          String
+  sliderUrl             String?
   genre                 String[]
   age                   String
   duration              String
   trailerVideo          String
-  servers               Json?     
+  servers               Json?
   typePelicula          String
   descriptionPelicula   String
   createdAt             DateTime @default(now())
+  actores               String?
+  audio                 String?
+  anio                  Int?
 }
+
 
 model PopularMovie {
   id                    String   @id @default(cuid())
   title                 String
   thumbnailUrl          String
+  sliderUrl             String?
   genre                 String[]
   age                   String
   duration              String
   trailerVideo          String
-  servers               Json?     
+  servers               Json?
   typePelicula          String
   descriptionPelicula   String
   ranking               Int
+  actores               String?
+  audio                 String?
+  anio                  Int?
 }
+
 
 model Serie {
   id           String    @id @default(cuid())
   title        String
   description  String
   thumbnailUrl String
+  sliderUrl    String?
+  actores      String?
+  audio        String?
+  anio         Int?
   genre        String[]
   age          String
   duration     String
@@ -90,6 +133,7 @@ model Serie {
   createdAt    DateTime  @default(now())
   seasons      Season[]
 }
+
 
 model Season {
   id        String     @id @default(cuid())
@@ -110,18 +154,23 @@ model Episode {
 }
 
 model Anime {
-  id           String        @id @default(cuid())
+  id           String         @id @default(cuid())
   title        String
   description  String
   thumbnailUrl String
+  sliderUrl    String?
+  actores      String?
+  audio        String?
+  anio         Int?
   genre        String[]
   age          String
   duration     String
   trailerVideo String
   type         String
-  createdAt    DateTime      @default(now())
+  createdAt    DateTime       @default(now())
   seasons      AnimeSeason[]
 }
+
 
 model AnimeSeason {
   id        String         @id @default(cuid())
