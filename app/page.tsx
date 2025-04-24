@@ -5,8 +5,6 @@ import { db } from "@/lib/db";
 import { auth } from "@/auth";
 import { TrendingMovies } from "./(routes)/(home)/components/TrendingMovies";
 import { ListMovies } from "./(routes)/(home)/components/ListMovies";
-
-// ✅ Nuevos imports
 import { BlockAnimes } from "@/components/Shared/BlockAnimes";
 import { BlockSeries } from "@/components/Shared/BlockSeries";
 
@@ -46,13 +44,12 @@ export default async function Home() {
       <SliderVideo />
       <TrendingMovies movies={trendingMovies} />
 
-      <div className="px-[4%] mt-20 space-y-20 md:space-y-0">
+      {/* ✅ Sección scroll-friendly y sin conflictos de anchura */}
+      <main className="w-full flex flex-col gap-20 px-[4%] mt-20">
         <ListMovies movies={movies} />
-
         <BlockSeries title="Series recien añadidas" series={series} />
-
         <BlockAnimes title="Animes Recien añadidos" animes={animes} />
-      </div>
+      </main>
     </div>
   );
 }

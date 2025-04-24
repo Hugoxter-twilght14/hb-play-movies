@@ -11,7 +11,7 @@ export function BlockAnimes({ title, animes }: BlockAnimesProps) {
     {
       id: "ver-mas",
       title: "Ver más",
-      thumbnailUrl: "/img/ver-mas-animes.jpg", // Asegúrate de que la imagen exista
+      thumbnailUrl: "/img/ver-mas-animes.jpg", // ✅ Asegúrate que esta imagen exista en /public/img
       genre: [],
       age: "",
       duration: "",
@@ -20,9 +20,11 @@ export function BlockAnimes({ title, animes }: BlockAnimesProps) {
   ];
 
   return (
-    <div className="relative px-[4%] md:pt-20 overflow-auto bg-[#171717]">
+    <section className="w-full px-[4%] pt-8 md:pt-20 bg-[#171717]">
       <h3 className="text-2xl font-bold text-white mb-3">{title}</h3>
-      <CarouselAnime animes={extendedAnimes} />
-    </div>
+      <div className="w-full overflow-x-auto">
+        <CarouselAnime animes={extendedAnimes} />
+      </div>
+    </section>
   );
 }
