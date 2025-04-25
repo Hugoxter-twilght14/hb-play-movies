@@ -36,7 +36,9 @@ export function SliderVideo({ animes }: Props) {
     >
       <div className="relative flex flex-col items-start px-6 md:px-20 z-10 w-full max-w-[90%]">
         <h2 className="text-4xl md:text-5xl font-bold mb-4">{anime.title}</h2>
-        <p className="text-base md:text-lg mb-6">{anime.description}</p>
+        <p className="text-base md:text-lg mb-6 line-clamp-3 max-w-[90%] sm:max-w-[75%] lg:max-w-[60%]">
+          {anime.description}
+          </p>
         <div className="flex gap-4">
           <Link href={`/anime/${anime.id}`}>
             <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-2 rounded">

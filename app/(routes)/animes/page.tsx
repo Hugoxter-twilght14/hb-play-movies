@@ -3,7 +3,7 @@ import { SliderVideo } from "./components/SliderVideo";
 import { db } from "@/lib/db";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import { BlockAnimes } from "./components/BlockAnimes";
+import { PaginatedAnimes } from "./components/PaginatedAnimes";
 
 export const dynamic = "force-dynamic";
 
@@ -20,12 +20,7 @@ export default async function Home() {
     include: { seasons: true },
   });
   
-   // Obtén los animes de la base de datos
-    const animesblock = await db.anime.findMany({
-      include: {
-        seasons: true, // Incluye las temporadas correctamente
-    },
-  });
+   
 
   const usersAnime = await db.userNetflix.findMany({
     where: { userId: session.user.id },
@@ -35,7 +30,7 @@ export default async function Home() {
     <div>
       <Navbar users={usersAnime} />
       {animes.length > 0 && <SliderVideo animes={animes} />}
-      <BlockAnimes animes={animesblock} />
+      <PaginatedAnimes/>
     </div>
   );
 }

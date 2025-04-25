@@ -3,7 +3,7 @@ import { SliderVideo } from "./components/SliderVideo"
 import { db } from "@/lib/db"
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
-import { BlockPeliculas } from "./components/BlockPeliculas"
+import { PaginatedPeliculas } from "./components/PaginatedPeliculas"
 
 export const dynamic = "force-dynamic";
 
@@ -20,8 +20,6 @@ export default async function Home() {
         },
       });
 
-      const movies = await db.movie.findMany()
-
       const peliculasRecientes = await db.movie.findMany({
         take: 6,
         orderBy: { createdAt: "desc" },
@@ -31,7 +29,7 @@ export default async function Home() {
     <div>
     <Navbar users={usersNetflix}/>
     <SliderVideo movies={peliculasRecientes} />
-    <BlockPeliculas movies={movies}/>
+    <PaginatedPeliculas/>
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { SliderVideo } from "./components/SliderVideo";
 import { db } from "@/lib/db";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import { BlockSeries } from "./components/BlockSeries";
+import { PaginatedSeries } from "./components/PaginatedSeries";
 
 export const dynamic = "force-dynamic";
 
@@ -14,13 +14,6 @@ export default async function Home() {
   if (!session || !session.user || !session.user.id) {
     return redirect("/login");
   }
-
-  // Obtén las series de la base de datos
-  const series = await db.serie.findMany({
-    include: {
-      seasons: true, // Si también necesitas las temporadas
-    },
-  });
 
   const usersNetflix = await db.userNetflix.findMany({
     where: {
@@ -37,7 +30,7 @@ export default async function Home() {
     <div>
       <Navbar users={usersNetflix} />
       <SliderVideo series={seriesRecientes} />
-      <BlockSeries series={series} /> {/* Pasa las series reales aquí */}
+      <PaginatedSeries/>
     </div>
   );
 }
