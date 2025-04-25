@@ -9,6 +9,7 @@ interface AnimeInfoProps {
   trailerVideo: string;
   description: string;
   type: string;
+  sliderUrl?: string | null;
   actores?: string | null;
   audio?: string | null;
   anio?: number | null;

@@ -53,6 +53,10 @@ export default async function Page({ params }: { params: { serieId?: string } })
         trailerVideo={serie.trailerVideo}
         description={serie.description}
         type={serie.type}
+        sliderUrl={serie.sliderUrl}
+        actores={serie.actores}
+        audio={serie.audio}
+        anio={serie.anio}
       />
 
       <EpisodeSelector seasons={parsedSeasons} />

@@ -74,6 +74,10 @@ export default async function Page({ params }: { params: { animeId?: string } })
         trailerVideo={anime.trailerVideo}
         description={anime.description}
         type={anime.type}
+        sliderUrl={anime.sliderUrl}
+        actores={anime.actores}
+        audio={anime.audio}
+        anio={anime.anio}
       />
 
       <EpisodeSelector anime={parsedAnime} />
