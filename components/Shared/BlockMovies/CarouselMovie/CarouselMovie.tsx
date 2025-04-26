@@ -7,7 +7,7 @@ import { ChaptersInfo } from "./ChaptersInfo";
 import { FilmGenres } from "./FilmGenres";
 import { CarouselMovieProps } from "./CarouselMovie.types";
 
-export function CarouselMovie({ movies }: CarouselMovieProps) {
+export function CarouselMovie({ movies, isMyList, isMyListMap }: CarouselMovieProps) {
   const [activeIndex, setActiveIndex] = useState<string | null>(null);
 
   return (
@@ -38,21 +38,22 @@ export function CarouselMovie({ movies }: CarouselMovieProps) {
                   loading="lazy"
                 />
 
-                {/* Contenido desplegable */}
                 <div
                   className={`absolute top-0 left-0 w-full h-full bg-zinc-900/95 p-4 flex flex-col gap-2 z-10 transition-all duration-300 ${
                     activeIndex === movie.id ? "translate-y-0" : "translate-y-full"
                   }`}
                 >
-                  <h4 className="text-base font-semibold truncate">
-                    {movie.title}
-                  </h4>
+                  <h4 className="text-base font-semibold truncate">{movie.title}</h4>
 
                   <p className="text-gray-300 text-sm line-clamp-2">
                     {movie.descriptionPelicula}
                   </p>
 
-                  <ActionsButtonsFilm title={movie.title} idFilm={movie.id} />
+                  <ActionsButtonsFilm
+                    idFilm={movie.id}
+                    title={movie.title}
+                    isMyList={isMyListMap ? isMyListMap[movie.id] : isMyList}
+                  />
 
                   <ChaptersInfo
                     title={movie.title}

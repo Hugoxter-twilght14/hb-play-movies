@@ -5,6 +5,8 @@ import { useState } from "react";
 import { ActionsButtons } from "@/components/Shared/ActionButtons";
 import { ChaptersInfo } from "@/components/Shared/ChaptersInfo";
 import { FilmGenres } from "@/components/Shared/FilmGenres";
+import { usePerfilId } from "@/hooks/use-perfil-id";
+import { useCheckContenidoEnListas } from "@/hooks/useCheckContenidoEnListas";
 
 interface Anime {
   id: string;
@@ -23,6 +25,13 @@ interface Props {
 
 export function CarouselAnime({ animes }: Props) {
   const [activeIndex, setActiveIndex] = useState<string | null>(null);
+  const perfilId = usePerfilId();
+
+  const idsAnimes = animes.filter(a => !a.isMoreCard).map((a) => a.id);
+  const { existsMap } = useCheckContenidoEnListas({
+    perfilId: perfilId ?? "",
+    contenidoIds: idsAnimes
+  });
 
   return (
     <div className="w-full overflow-x-auto max-w-full">
@@ -60,16 +69,14 @@ export function CarouselAnime({ animes }: Props) {
                   <h4 className="text-base font-semibold truncate">{anime.title}</h4>
 
                   {anime.description && (
-                    <p className="text-gray-300 text-sm line-clamp-2">
-                      {anime.description}
-                    </p>
+                    <p className="text-gray-300 text-sm line-clamp-2">{anime.description}</p>
                   )}
 
                   <ActionsButtons
                     filmId={anime.id}
                     title={anime.title}
                     type="anime"
-                    isMyList={false}
+                    isMyList={existsMap[anime.id] || false}
                   />
 
                   <ChaptersInfo

@@ -1,6 +1,5 @@
 import { Movie } from "@prisma/client";
 
-// ✔ Extendemos con campos opcionales
 export type ExtendedMovie = Omit<Movie, "sliderUrl" | "actores" | "audio" | "anio"> & {
   isMoreCard?: boolean;
   sliderUrl?: string | null;
@@ -11,5 +10,6 @@ export type ExtendedMovie = Omit<Movie, "sliderUrl" | "actores" | "audio" | "ani
 
 export type CarouselMovieProps = {
   movies: ExtendedMovie[];
-  isMyList: boolean;
+  isMyList?: boolean;
+  isMyListMap?: Record<string, boolean>; // 👈 También aquí agregamos map
 };

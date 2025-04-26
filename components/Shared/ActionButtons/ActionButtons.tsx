@@ -1,24 +1,73 @@
-import { Button } from "@/components/ui/button";
-import { Heart } from "lucide-react";
-import { Play } from "lucide-react";
-import { useRouter } from "next/navigation";
+"use client"
+
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { Play, BookmarkPlus, BookmarkCheck } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import { useToast } from "@/hooks/use-toast"
+import { usePerfilId } from "@/hooks/use-perfil-id"
+import { useListasPerfil } from "@/hooks/useListasPerfil" // ✅ usamos hook
+import { SeleccionarListaModal } from "@/components/Shared/SeleccionarListaModal"
+import { CrearListaModal } from "@/components/Shared/CrearListaModal"
 
 interface Props {
-  filmId: string;
-  title?: string;
-  type: "movie" | "anime" | "serie";
-  isMyList?: boolean;
+  filmId: string
+  title?: string
+  type: "pelicula" | "anime" | "serie"
+  isMyList?: boolean
 }
 
-export function ActionsButtons({ filmId, title, type, isMyList = false }: Props) {
-  const router = useRouter();
-  const onPlayButton=()=>{
-      router.push(`/${type}/${filmId}`);
-  };
-  const handleClick = () => {
-    console.log(`✅ Me gusta: ${type.toUpperCase()} – ${title} (ID: ${filmId})`);
-    // Aquí podrías manejar el almacenamiento local o llamada a la API
-  };
+export function ActionsButtons({ filmId, type, isMyList = false }: Props) {
+  const router = useRouter()
+  const { toast } = useToast()
+  const perfilId = usePerfilId()
+
+  const [addedToList, setAddedToList] = useState<boolean>(false)
+  const [openSeleccionar, setOpenSeleccionar] = useState(false)
+  const [openCrear, setOpenCrear] = useState(false)
+
+  const { listas, loading: loadingListas } = useListasPerfil(perfilId ?? "")
+  const hasListas = listas.length > 0
+
+  useEffect(() => {
+    setAddedToList(isMyList)
+  }, [isMyList])
+
+  const onPlayButton = () => {
+    router.push(`/${type}/${filmId}`)
+  }
+
+  const handleRemove = async () => {
+    try {
+      const res = await fetch(`/api/listas/contenido/eliminar/${filmId}`, {
+        method: "DELETE",
+      })
+
+      if (!res.ok) {
+        const errData = await res.json()
+        throw new Error(errData.message || "Error al eliminar")
+      }
+
+      toast({
+        title: "Eliminado",
+        description: "El contenido fue eliminado de tu lista.",
+      })
+
+      setAddedToList(false)
+      router.refresh()
+    } catch (error: unknown) {
+      const err = error as Error
+      console.error(err)
+      toast({
+        title: "Error",
+        description: err.message || "No se pudo eliminar",
+        variant: "destructive",
+      })
+    }
+  }
+
+  if (!perfilId) return null
 
   return (
     <div className="flex items-center gap-2 mt-2">
@@ -26,20 +75,62 @@ export function ActionsButtons({ filmId, title, type, isMyList = false }: Props)
         size="icon"
         variant="ghost"
         className="bg-slate-50 rounded-full flex items-center justify-center h-7 w-7"
-        onClick={onPlayButton}>
-          <Play className="text-zinc-900 h-3 w-3 fill-zinc-900"></Play>
-        </Button>
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={handleClick}
-        className={`flex items-center gap-1 ${
-          isMyList ? "text-green-500" : "text-white"
-        }`}
+        onClick={onPlayButton}
       >
-        <Heart size={16} />
-        {isMyList ? "En tu lista" : "Me gusta"}
+        <Play className="text-zinc-900 h-3 w-3 fill-zinc-900" />
       </Button>
+
+      {addedToList ? (
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleRemove}
+          className="flex items-center gap-1 text-green-500"
+        >
+          <BookmarkCheck size={16} />
+          Eliminar de la lista
+        </Button>
+      ) : loadingListas ? (
+        <Button variant="outline" size="sm" disabled>
+          Cargando...
+        </Button>
+      ) : hasListas ? (
+        <SeleccionarListaModal
+          open={openSeleccionar}
+          onOpenChange={setOpenSeleccionar}
+          perfilId={perfilId}
+          contenidoId={filmId}
+          tipo={type}
+          trigger={
+            <Button variant="outline" size="sm" className="flex items-center gap-1 text-white">
+              <BookmarkPlus size={16} />
+              Añadir a la lista
+            </Button>
+          }
+          onSuccess={() => {
+            setAddedToList(true)
+            router.refresh()
+          }}
+        />
+      ) : (
+        <CrearListaModal
+          open={openCrear}
+          onOpenChange={setOpenCrear}
+          perfilId={perfilId}
+          contenidoId={filmId}
+          tipo={type}
+          trigger={
+            <Button variant="outline" size="sm" className="flex items-center gap-1 text-white">
+              <BookmarkPlus size={16} />
+              Crear primera lista
+            </Button>
+          }
+          onSuccess={() => {
+            setAddedToList(true)
+            router.refresh()
+          }}
+        />
+      )}
     </div>
-  );
+  )
 }

@@ -1,4 +1,6 @@
 export type ActionsButtonFilmProps = {
-    title: string;
-    idFilm: string;
+        idFilm: string;
+        title?: string;
+        isMyList?: boolean;
+    
 };

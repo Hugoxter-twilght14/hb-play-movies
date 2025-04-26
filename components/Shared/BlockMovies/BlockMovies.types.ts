@@ -7,5 +7,6 @@ export type ExtendedMovie = Movie & {
 export type BlockMoviesProps = {
   title: string;
   movies: ExtendedMovie[];
-  isMyList: boolean;
+  isMyList?: boolean;
+  isMyListMap?: Record<string, boolean>; 
 };

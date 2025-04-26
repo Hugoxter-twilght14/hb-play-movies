@@ -2,7 +2,7 @@ import { BlockMoviesProps } from "./BlockMovies.types";
 import { CarouselMovie } from "./CarouselMovie";
 
 export function BlockMovies(props: BlockMoviesProps) {
-  const { title, movies, isMyList } = props;
+  const { title, movies, isMyList, isMyListMap } = props;
 
   if (!movies || movies.length === 0) return null;
 
@@ -20,7 +20,7 @@ export function BlockMovies(props: BlockMoviesProps) {
       descriptionPelicula: "",
       ranking: 0,
       servers: [],
-      createdAt: new Date(), // ✅ importante que sea tipo Date si el modelo lo requiere
+      createdAt: new Date(),
       typePelicula: "",
       trailerVideo: "",
       isMoreCard: true,
@@ -31,7 +31,7 @@ export function BlockMovies(props: BlockMoviesProps) {
     <section className="w-full px-[4%] pt-8 md:pt-[-10px] bg-[#171717]">
       <h3 className="text-2xl font-bold text-white mb-3">{title}</h3>
       <div className="w-full overflow-x-auto">
-        <CarouselMovie movies={extendedMovies} isMyList={isMyList} />
+        <CarouselMovie movies={extendedMovies} isMyList={isMyList} isMyListMap={isMyListMap} />
       </div>
     </section>
   );
