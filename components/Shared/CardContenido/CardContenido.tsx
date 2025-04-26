@@ -50,8 +50,15 @@ export function CardContenido({ contenidoId, tipo }: Props) {
   }, [contenidoId, tipo])
 
   const handleClick = () => {
-    router.push(`/${tipo}/${contenidoId}`)
+    if (tipo === "pelicula") {
+      router.push(`/movie/${contenidoId}`)
+    } else if (tipo === "anime") {
+      router.push(`/anime/${contenidoId}`)
+    } else if (tipo === "serie") {
+      router.push(`/serie/${contenidoId}`)
+    }
   }
+  
 
   const handleRemove = async () => {
     try {

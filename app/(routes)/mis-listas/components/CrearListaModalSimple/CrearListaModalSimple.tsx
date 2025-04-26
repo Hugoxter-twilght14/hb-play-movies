@@ -19,7 +19,7 @@ interface CrearListaSimpleModalProps {
   onSuccess?: () => void
 }
 
-export function CrearListaSimpleModal({
+export function CrearListaModalSimple({
   perfilId,
   trigger,
   onSuccess,

@@ -1,8 +1,9 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation" // 👈 necesario para refresh
 import { Lista, ListaContenido } from "@prisma/client"
-import { CrearListaSimpleModal } from "../CrearListaModalSimple"
+import { CrearListaModalSimple } from "../CrearListaModalSimple"
 import { Button } from "@/components/ui/button"
 import { ListaItem } from "../ListaItem"
 
@@ -12,12 +13,14 @@ interface Props {
 }
 
 export function MisListasClient({ perfilId, listas }: Props) {
+  const router = useRouter() // 👈 router
   const [listasState, setListasState] = useState(listas)
 
-  const handleListaCreada = async () => {
+  const handleListaActualizada = async () => {
     const res = await fetch(`/api/listas/perfil/${perfilId}`)
     const nuevasListas = await res.json()
     setListasState(nuevasListas)
+    router.refresh() // 🚀 fuerza actualizar la página
   }
 
   return (
@@ -25,10 +28,10 @@ export function MisListasClient({ perfilId, listas }: Props) {
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-bold">Tus Listas</h1>
 
-        <CrearListaSimpleModal
+        <CrearListaModalSimple
           perfilId={perfilId}
           trigger={<Button>+ Nueva Lista</Button>}
-          onSuccess={handleListaCreada}
+          onSuccess={handleListaActualizada}
         />
       </div>
 
@@ -40,7 +43,7 @@ export function MisListasClient({ perfilId, listas }: Props) {
             <ListaItem
               key={lista.id}
               lista={lista}
-              onRefresh={handleListaCreada}
+              onRefresh={handleListaActualizada}
             />
           ))}
         </div>

@@ -34,7 +34,7 @@ export function EditarListaModal({ lista, onSuccess }: EditarListaModalProps) {
   const handleGuardar = async () => {
     setLoading(true)
     try {
-      const res = await fetch(`/api/listas/${lista.id}`, {
+      const res = await fetch(`/api/listas/update/${lista.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, descripcion }),

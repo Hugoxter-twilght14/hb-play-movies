@@ -1,11 +1,13 @@
 "use client"
 
-import { Lista, ListaContenido } from "@prisma/client"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { Pencil, Trash2 } from "lucide-react"
+import { Lista, ListaContenido } from "@prisma/client"
+import { Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { toast } from "@/hooks/use-toast"
+import { EditarListaModal } from "@/components/Shared/EditarListaModal"
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -24,6 +26,7 @@ interface Props {
 }
 
 export function ListaItem({ lista, onRefresh }: Props) {
+  const router = useRouter()
   const [loading, setLoading] = useState(false)
 
   const eliminarLista = async () => {
@@ -43,8 +46,12 @@ export function ListaItem({ lista, onRefresh }: Props) {
         description: "La lista se eliminó correctamente.",
       })
 
-      if (onRefresh) onRefresh()
-    } catch (err: unknown) { // 👈 corregimos any por unknown
+      if (onRefresh) {
+        onRefresh()
+      } else {
+        router.refresh()
+      }
+    } catch (err: unknown) {
       const error = err as Error
       toast({
         title: "Error",
@@ -70,27 +77,37 @@ export function ListaItem({ lista, onRefresh }: Props) {
       </Link>
 
       <div className="flex gap-2 mt-3">
-        <Button size="icon" variant="ghost" disabled>
-          <Pencil className="w-4 h-4" />
-        </Button>
+        {/* Botón para editar */}
+        <EditarListaModal
+          lista={lista}
+          onSuccess={() => {
+            if (onRefresh) onRefresh()
+            else router.refresh()
+          }}
+        />
 
+        {/* Botón para eliminar */}
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button size="icon" variant="destructive" disabled={loading}>
-              <Trash2 className="w-4 h-4" />
+              {loading ? (
+                <div className="w-4 h-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+              ) : (
+                <Trash2 className="w-4 h-4" />
+              )}
             </Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>¿Eliminar lista?</AlertDialogTitle>
               <AlertDialogDescription>
-                Esta acción eliminará la lista y todos sus contenidos asociados.
+                Esta acción eliminará la lista y sus contenidos asociados.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancelar</AlertDialogCancel>
-              <AlertDialogAction onClick={eliminarLista}>
-                Eliminar
+              <AlertDialogAction onClick={eliminarLista} disabled={loading}>
+                Confirmar
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
