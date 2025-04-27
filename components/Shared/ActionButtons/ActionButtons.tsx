@@ -1,86 +1,89 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { Play, BookmarkPlus, BookmarkCheck } from "lucide-react"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Play, BookmarkPlus, BookmarkCheck } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
-import { usePerfilId } from "@/hooks/use-perfil-id"
-import { useListasPerfil } from "@/hooks/useListasPerfil" // ✅ usamos hook
-import { SeleccionarListaModal } from "@/components/Shared/SeleccionarListaModal"
-import { CrearListaModal } from "@/components/Shared/CrearListaModal"
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { usePerfilId } from "@/hooks/use-perfil-id";
+import { useCheckContenidoEnListas } from "@/hooks/useCheckContenidoEnListas";
+import { SeleccionarListaModal } from "@/components/Shared/SeleccionarListaModal";
 
 interface Props {
-  filmId: string
-  title?: string
-  type: "pelicula" | "anime" | "serie"
-  isMyList?: boolean
+  filmId: string;
+  title?: string;
+  type: "pelicula" | "anime" | "serie";
+  isMyList?: boolean; // 👈 Esta propiedad es para controlar si el contenido está en la lista
 }
 
-export function ActionsButtons({ filmId, type, isMyList = false }: Props) {
-  const router = useRouter()
-  const { toast } = useToast()
-  const perfilId = usePerfilId()
+export function ActionsButtons({ filmId, type }: Props) {
+  const router = useRouter();
+  const { toast } = useToast();
+  const perfilId = usePerfilId();
 
-  const [addedToList, setAddedToList] = useState<boolean>(false)
-  const [openSeleccionar, setOpenSeleccionar] = useState(false)
-  const [openCrear, setOpenCrear] = useState(false)
+  const [openSeleccionar, setOpenSeleccionar] = useState(false);
+  const [localInList, setLocalInList] = useState<boolean | null>(null); // 👈 Control interno
 
-  const { listas, loading: loadingListas } = useListasPerfil(perfilId ?? "")
-  const hasListas = listas.length > 0
+  const { checking, existsMap } = useCheckContenidoEnListas({
+    perfilId: perfilId ?? "",
+    contenidoIds: [filmId],
+  });
 
-  useEffect(() => {
-    setAddedToList(isMyList)
-  }, [isMyList])
+  const isInList = localInList !== null ? localInList : existsMap[filmId] || false;
 
-  const onPlayButton = () => {
-    router.push(`/${type}/${filmId}`)
-  }
+  const handlePlay = () => {
+    router.push(`/${type}/${filmId}`);
+  };
 
   const handleRemove = async () => {
     try {
       const res = await fetch(`/api/listas/contenido/eliminar/${filmId}`, {
         method: "DELETE",
-      })
+      });
 
       if (!res.ok) {
-        const errData = await res.json()
-        throw new Error(errData.message || "Error al eliminar")
+        const errData = await res.json();
+        throw new Error(errData.message || "Error al eliminar");
       }
 
       toast({
         title: "Eliminado",
         description: "El contenido fue eliminado de tu lista.",
-      })
+      });
 
-      setAddedToList(false)
-      router.refresh()
+      setLocalInList(false); // 🔥 Actualizamos estado sin recargar
     } catch (error: unknown) {
-      const err = error as Error
-      console.error(err)
+      const err = error as Error;
+      console.error(error);
       toast({
         title: "Error",
         description: err.message || "No se pudo eliminar",
         variant: "destructive",
-      })
+      });
     }
-  }
+  };
 
-  if (!perfilId) return null
+  if (!perfilId) return null;
 
   return (
     <div className="flex items-center gap-2 mt-2">
+      {/* Botón Play */}
       <Button
         size="icon"
         variant="ghost"
         className="bg-slate-50 rounded-full flex items-center justify-center h-7 w-7"
-        onClick={onPlayButton}
+        onClick={handlePlay}
       >
         <Play className="text-zinc-900 h-3 w-3 fill-zinc-900" />
       </Button>
 
-      {addedToList ? (
+      {/* Botón Añadir / Eliminar */}
+      {checking ? (
+        <Button variant="outline" size="sm" disabled>
+          Cargando...
+        </Button>
+      ) : isInList ? (
         <Button
           variant="outline"
           size="sm"
@@ -88,49 +91,29 @@ export function ActionsButtons({ filmId, type, isMyList = false }: Props) {
           className="flex items-center gap-1 text-green-500"
         >
           <BookmarkCheck size={16} />
-          Eliminar de la lista
+          Eliminar de lista
         </Button>
-      ) : loadingListas ? (
-        <Button variant="outline" size="sm" disabled>
-          Cargando...
-        </Button>
-      ) : hasListas ? (
+      ) : (
         <SeleccionarListaModal
           open={openSeleccionar}
           onOpenChange={setOpenSeleccionar}
-          perfilId={perfilId}
           contenidoId={filmId}
           tipo={type}
           trigger={
-            <Button variant="outline" size="sm" className="flex items-center gap-1 text-white">
+            <Button
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-1 text-white"
+            >
               <BookmarkPlus size={16} />
               Añadir a la lista
             </Button>
           }
           onSuccess={() => {
-            setAddedToList(true)
-            router.refresh()
-          }}
-        />
-      ) : (
-        <CrearListaModal
-          open={openCrear}
-          onOpenChange={setOpenCrear}
-          perfilId={perfilId}
-          contenidoId={filmId}
-          tipo={type}
-          trigger={
-            <Button variant="outline" size="sm" className="flex items-center gap-1 text-white">
-              <BookmarkPlus size={16} />
-              Crear primera lista
-            </Button>
-          }
-          onSuccess={() => {
-            setAddedToList(true)
-            router.refresh()
+            setLocalInList(true); // 🔥 Marcamos como agregado
           }}
         />
       )}
     </div>
-  )
+  );
 }

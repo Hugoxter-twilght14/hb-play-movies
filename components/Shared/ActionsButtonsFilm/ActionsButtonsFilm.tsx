@@ -87,7 +87,7 @@ export function ActionsButtonsFilm({ idFilm, isMyList = false }: Props) {
           className="flex items-center gap-1 text-green-500"
         >
           <BookmarkCheck size={16} />
-          Eliminar de la lista
+          Eliminar de lista
         </Button>
       ) : loadingListas ? (
         <Button variant="outline" size="sm" disabled>
@@ -97,7 +97,6 @@ export function ActionsButtonsFilm({ idFilm, isMyList = false }: Props) {
         <SeleccionarListaModal
           open={openSeleccionar}
           onOpenChange={setOpenSeleccionar}
-          perfilId={perfilId}
           contenidoId={idFilm}
           tipo="pelicula"
           trigger={

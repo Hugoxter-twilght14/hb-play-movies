@@ -1,38 +1,44 @@
-import { auth } from "@/auth"
-import { db } from "@/lib/db"
-import { redirect, notFound } from "next/navigation"
-import { CardContenido } from "@/components/Shared/CardContenido"
-import { VolverListas } from "@/components/Shared/VolverListas"
+import { auth } from "@/auth";
+import { db } from "@/lib/db";
+import { redirect, notFound } from "next/navigation";
+import { CardContenido } from "@/components/Shared/CardContenido";
+import { VolverListas } from "@/components/Shared/VolverListas";
+import { cookies } from "next/headers";
 
 interface PageProps {
   params: {
-    id: string // listaId
-  }
+    id: string; // listaId
+  };
 }
 
 export default async function ListaDetallePage({ params }: PageProps) {
-  const session = await auth()
+  const session = await auth();
 
   if (!session?.user?.id) {
-    return redirect("/login")
+    return redirect("/login");
   }
 
-  const perfil = await db.userNetflix.findFirst({
-    where: { userId: session.user.id },
-  })
+  const perfilId = cookies().get("perfilId")?.value;
 
-  if (!perfil) return redirect("/")
+  if (!perfilId) {
+    return redirect("/profiles");
+  }
 
-  const lista = await db.lista.findUnique({
-    where: { id: params.id, perfilId: perfil.id },
-    include: { contenidos: true },
-  })
+  const lista = await db.lista.findFirst({
+    where: {
+      id: params.id,
+      perfilId: perfilId,
+    },
+    include: {
+      contenidos: true,
+    },
+  });
 
-  if (!lista) return notFound()
+  if (!lista) return notFound();
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <VolverListas /> {/* ✅ Botón cliente separado */}
+      <VolverListas /> {/* ✅ Botón para volver a "Mis Listas" */}
       
       <h1 className="text-2xl font-bold mb-2">{lista.nombre}</h1>
       {lista.descripcion && (
@@ -53,5 +59,5 @@ export default async function ListaDetallePage({ params }: PageProps) {
         </div>
       )}
     </div>
-  )
+  );
 }

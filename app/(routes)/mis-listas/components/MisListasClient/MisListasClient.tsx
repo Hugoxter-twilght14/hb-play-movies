@@ -1,26 +1,38 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation" // 👈 necesario para refresh
-import { Lista, ListaContenido } from "@prisma/client"
-import { CrearListaModalSimple } from "../CrearListaModalSimple"
-import { Button } from "@/components/ui/button"
-import { ListaItem } from "../ListaItem"
+import { useState, useEffect } from "react";
+import { CrearListaModalSimple } from "../CrearListaModalSimple";
+import { Button } from "@/components/ui/button";
+import { Lista, ListaContenido } from "@prisma/client"; // ✅ IMPORTANTE
+import { ListaItem } from "../ListaItem";
 
 interface Props {
-  perfilId: string
-  listas: (Lista & { contenidos: ListaContenido[] })[]
+  perfilId: string;
 }
 
-export function MisListasClient({ perfilId, listas }: Props) {
-  const router = useRouter() // 👈 router
-  const [listasState, setListasState] = useState(listas)
+export function MisListasClient({ perfilId }: Props) {
+  const [listas, setListas] = useState<(Lista & { contenidos: ListaContenido[] })[]>([]); // ✅ TYPED
+  const [loading, setLoading] = useState(true);
 
-  const handleListaActualizada = async () => {
-    const res = await fetch(`/api/listas/perfil/${perfilId}`)
-    const nuevasListas = await res.json()
-    setListasState(nuevasListas)
-    router.refresh() // 🚀 fuerza actualizar la página
+  const fetchListas = async () => {
+    try {
+      const res = await fetch(`/api/listas/perfil/${perfilId}`);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Error cargando listas");
+      setListas(data);
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchListas();
+  }, [perfilId]);
+
+  if (loading) {
+    return <div className="text-center text-muted-foreground pt-20">Cargando tus listas...</div>;
   }
 
   return (
@@ -31,23 +43,23 @@ export function MisListasClient({ perfilId, listas }: Props) {
         <CrearListaModalSimple
           perfilId={perfilId}
           trigger={<Button>+ Nueva Lista</Button>}
-          onSuccess={handleListaActualizada}
+          onSuccess={fetchListas}
         />
       </div>
 
-      {listasState.length === 0 ? (
+      {listas.length === 0 ? (
         <p className="text-muted-foreground">No has creado ninguna lista aún.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {listasState.map((lista) => (
+          {listas.map((lista) => (
             <ListaItem
               key={lista.id}
               lista={lista}
-              onRefresh={handleListaActualizada}
+              onRefresh={fetchListas}
             />
           ))}
         </div>
       )}
     </div>
-  )
+  );
 }

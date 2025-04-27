@@ -1,17 +1,16 @@
-"use client"
+"use client";
 
-import axios from "axios"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { cn } from "@/lib/utils"
-import { AddProfile } from "./AddProfile"
-import { ProfilesProps } from "./Profiles.types"
-import { Button } from "@/components/ui/button"
-import { Trash2 } from "lucide-react"
-import { toast } from "@/hooks/use-toast"
-import { useCurrentNetflixUser } from "@/hooks/use-current-user"
-import { UserNetflix } from "@prisma/client"
+import axios from "axios";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { AddProfile } from "./AddProfile";
+import { ProfilesProps } from "./Profiles.types";
+import { Button } from "@/components/ui/button";
+import { Trash2 } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+import { UserNetflix } from "@prisma/client";
 
 import {
   AlertDialog,
@@ -23,38 +22,59 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
 
-export function Profiles(props: ProfilesProps) {
-  const { users } = props
-  const { changeCurrentUser } = useCurrentNetflixUser()
-  const [manageProfiles, setManageProfiles] = useState(false)
-  const router = useRouter()
+export function Profiles({ users }: ProfilesProps) {
+  const [manageProfiles, setManageProfiles] = useState(false);
+  const router = useRouter();
 
-  const onClickUser = (user: UserNetflix) => {
-    localStorage.setItem("perfilId", user.id)
+  const onClickUser = async (user: UserNetflix) => {
+    try {
+      localStorage.setItem("perfilId", user.id);
+      localStorage.setItem("perfilChangedAt", Date.now().toString());
 
-    changeCurrentUser(user) // ✅ Tu lógica existente
-    router.push("/")        // ✅ Redirige a la home
-  }
+      const res = await fetch("/api/perfil-actual", {
+        method: "POST",
+        body: JSON.stringify({ perfilId: user.id }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error("Error actualizando perfil en servidor");
+      }
+
+      // ✅ Esperar confirmación y recargar
+      window.location.href = "/";
+    } catch (error) {
+      console.error("Error seleccionando perfil:", error);
+      toast({
+        title: "Error al cambiar de perfil",
+        description: "Intenta nuevamente",
+        variant: "destructive",
+      });
+    }
+  };
 
   const deleteUser = async (userIdNetflix: string) => {
     try {
       await axios.delete("/api/userNetflix", {
-        data: { userIdNetflix }
-      })
+        data: { userIdNetflix },
+      });
 
-      setManageProfiles(false)
-      toast({ title: "Perfil eliminado exitosamente" })
-      router.refresh()
+      setManageProfiles(false);
+      toast({ title: "Perfil eliminado exitosamente" });
+      router.refresh();
     } catch (error) {
-      console.error(error)
+      console.error(error);
       toast({
-        title: "Ha ocurrido un error al eliminar el perfil",
-        variant: "destructive"
-      })
+        title: "Error al eliminar perfil",
+        description: "No se pudo eliminar el perfil",
+        variant: "destructive",
+      });
     }
-  }
+  };
 
   return (
     <div>
@@ -98,8 +118,7 @@ export function Profiles(props: ProfilesProps) {
                       ¿Estás seguro que quieres eliminar este perfil?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                      Esta acción no se puede deshacer y eliminará permanentemente
-                      el perfil asociado a tu cuenta.
+                      Esta acción no se puede deshacer.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
@@ -133,5 +152,5 @@ export function Profiles(props: ProfilesProps) {
         </Button>
       </div>
     </div>
-  )
+  );
 }

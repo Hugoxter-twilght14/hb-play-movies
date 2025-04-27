@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
 import { CrearListaModal } from "../CrearListaModal"
+import { useCurrentNetflixUser } from "@/hooks/use-current-user"
 
 interface Lista {
   id: string
@@ -20,7 +21,6 @@ interface Lista {
 }
 
 interface SeleccionarListaModalProps {
-  perfilId: string
   contenidoId: string
   tipo: "pelicula" | "anime" | "serie"
   trigger: React.ReactNode
@@ -30,7 +30,6 @@ interface SeleccionarListaModalProps {
 }
 
 export function SeleccionarListaModal({
-  perfilId,
   contenidoId,
   tipo,
   trigger,
@@ -38,6 +37,7 @@ export function SeleccionarListaModal({
   open,
   onOpenChange,
 }: SeleccionarListaModalProps) {
+  const { currentUser } = useCurrentNetflixUser() // 🚀 importante
   const [listas, setListas] = useState<Lista[]>([])
   const [loading, setLoading] = useState(false)
   const [crearOpen, setCrearOpen] = useState(false)
@@ -50,7 +50,8 @@ export function SeleccionarListaModal({
 
   const fetchListas = async () => {
     try {
-      const res = await fetch(`/api/listas/perfil/${perfilId}`)
+      if (!currentUser) return // 🚀 asegurarse que haya perfil activo
+      const res = await fetch(`/api/listas/perfil/${currentUser.id}`)
       const data: Lista[] = await res.json()
       if (res.ok) {
         setListas(data)
@@ -106,9 +107,9 @@ export function SeleccionarListaModal({
   }
 
   useEffect(() => {
-    if (dialogOpen) fetchListas()
+    if (dialogOpen && currentUser) fetchListas()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dialogOpen])
+  }, [dialogOpen, currentUser?.id]) // 👈 reactiva la carga si cambia el perfil también
 
   return (
     <>
@@ -155,7 +156,7 @@ export function SeleccionarListaModal({
       <CrearListaModal
         open={crearOpen}
         onOpenChange={setCrearOpen}
-        perfilId={perfilId}
+        perfilId={currentUser?.id || ""} // 🚀 pasamos el perfil actualizado
         contenidoId={contenidoId}
         tipo={tipo}
         trigger={<></>}
