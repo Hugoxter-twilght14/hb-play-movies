@@ -10,6 +10,7 @@ import { ProfilesProps } from "./Profiles.types";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useCurrentNetflixUser } from "@/hooks/use-current-user";
 import { UserNetflix } from "@prisma/client";
 
 import {
@@ -24,16 +25,20 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-export function Profiles({ users }: ProfilesProps) {
+export function Profiles(props: ProfilesProps) {
+  const { users } = props;
+  const { changeCurrentUser } = useCurrentNetflixUser();
   const [manageProfiles, setManageProfiles] = useState(false);
   const router = useRouter();
 
   const onClickUser = async (user: UserNetflix) => {
     try {
+      // Guardar en localStorage
       localStorage.setItem("perfilId", user.id);
       localStorage.setItem("perfilChangedAt", Date.now().toString());
 
-      const res = await fetch("/api/perfil-actual", {
+      // Actualizar en servidor
+      await fetch("/api/perfil-actual", {
         method: "POST",
         body: JSON.stringify({ perfilId: user.id }),
         headers: {
@@ -41,19 +46,13 @@ export function Profiles({ users }: ProfilesProps) {
         },
       });
 
-      if (!res.ok) {
-        throw new Error("Error actualizando perfil en servidor");
-      }
+      // 🔥 ACTUALIZAR el estado global también
+      changeCurrentUser(user);
 
-      // ✅ Esperar confirmación y recargar
+      // Ir al home (refrescando toda la app)
       window.location.href = "/";
     } catch (error) {
       console.error("Error seleccionando perfil:", error);
-      toast({
-        title: "Error al cambiar de perfil",
-        description: "Intenta nuevamente",
-        variant: "destructive",
-      });
     }
   };
 
@@ -69,8 +68,7 @@ export function Profiles({ users }: ProfilesProps) {
     } catch (error) {
       console.error(error);
       toast({
-        title: "Error al eliminar perfil",
-        description: "No se pudo eliminar el perfil",
+        title: "Ha ocurrido un error al eliminar el perfil",
         variant: "destructive",
       });
     }
@@ -118,7 +116,8 @@ export function Profiles({ users }: ProfilesProps) {
                       ¿Estás seguro que quieres eliminar este perfil?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                      Esta acción no se puede deshacer.
+                      Esta acción no se puede deshacer y eliminará permanentemente
+                      el perfil asociado a tu cuenta.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
