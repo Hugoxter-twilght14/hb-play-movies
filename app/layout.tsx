@@ -15,8 +15,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "HB PlayMovies",
+  title: "PlayMovies",
   description: "Creación de HB Play Movies by HBStudios",
+ 
 };
 
 export default function RootLayout({
@@ -26,9 +27,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-900`}
       >
@@ -38,4 +36,3 @@ export default function RootLayout({
     </html>
   );
 }
-

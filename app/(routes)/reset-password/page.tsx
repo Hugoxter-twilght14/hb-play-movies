@@ -1,9 +1,10 @@
 "use client";
 
-import ResetPassword from "@/components/Shared/ResetPassword/ResetPassword";
+import { Suspense } from "react"; // 👈 Importamos Suspense
+import ResetPasswordClient from "@/components/Shared/ResetPassword/ResetPassword";
 import { useSearchParams } from "next/navigation";
 
-export default function ResetPasswordPage() {
+function ResetPasswordContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
@@ -17,7 +18,15 @@ export default function ResetPasswordPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
-      <ResetPassword token={token} />
+      <ResetPasswordClient token={token} />
     </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-white">Cargando...</div>}>
+      <ResetPasswordContent />
+    </Suspense>
   );
 }
