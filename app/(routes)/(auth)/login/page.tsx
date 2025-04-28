@@ -11,7 +11,7 @@ export default async function page() {
         <LoginForm/>
 
         <div className='mt-5 text-center'>
-            <Link href="/" className='hover:underline hover:opacity-70'>
+            <Link href="/olvide-password" className='hover:underline hover:opacity-70'>
                 ¿Olvidaste tu contraseña?
             </Link>
         </div>
