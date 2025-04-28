@@ -56,9 +56,9 @@ export function EditarListaModal({ lista, onSuccess }: EditarListaModalProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="p-1 rounded-full hover:bg-white/10 text-white">
-          <Pencil size={18} />
-        </button>
+        <Button  size="icon" className="bg-white hover:bg-[#00FFFF] text-black">
+          <Pencil className="w-4 h-4" />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

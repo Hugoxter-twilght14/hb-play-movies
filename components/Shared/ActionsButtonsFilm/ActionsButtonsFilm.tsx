@@ -69,7 +69,7 @@ export function ActionsButtonsFilm({ idFilm, isMyList = false }: Props) {
   if (!perfilId) return null
 
   return (
-    <div className="flex items-center gap-2 mt-2">
+    <div className="flex items-center gap-1 mt-2">
       <Button
         size="icon"
         variant="ghost"
@@ -84,10 +84,10 @@ export function ActionsButtonsFilm({ idFilm, isMyList = false }: Props) {
           variant="outline"
           size="sm"
           onClick={handleRemove}
-          className="flex items-center gap-1 text-green-500"
+          className="flex items-center gap-1 text-green-500 bg-black hover:text-black hover:bg-white"
         >
           <BookmarkCheck size={16} />
-          Eliminar de lista
+          Ya esta en tu lista
         </Button>
       ) : loadingListas ? (
         <Button variant="outline" size="sm" disabled>

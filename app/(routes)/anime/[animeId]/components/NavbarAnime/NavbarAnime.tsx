@@ -6,20 +6,16 @@ import { useRouter } from "next/navigation";
 export function NavbarAnime({ title }: NavbarAnimeProps) {
     const router = useRouter();
 
-    const backToHome = () => {
-        router.push("/animes");
-    };
-
     return (
-        <nav
+        <button
             className="fixed flex gap-2 p-5 cursor-pointer items-center z-10 bg-zinc-900/70 mt-[-20px]"
-            onClick={backToHome}
+            onClick={() => router.back()}
         >
             <ArrowLeft className="w-6 h-6" />
             <p>
                 Estás viendo:
                 <span className="font-bold px-1">{title}</span>
             </p>
-        </nav>
+        </button>
     );
 }

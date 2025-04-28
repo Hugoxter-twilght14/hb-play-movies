@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Play, BookmarkPlus, BookmarkCheck } from "lucide-react";
 
@@ -12,29 +12,29 @@ import { SeleccionarListaModal } from "@/components/Shared/SeleccionarListaModal
 
 interface Props {
   filmId: string;
-  title?: string;
   type: "pelicula" | "anime" | "serie";
-  isMyList?: boolean; // 👈 Esta propiedad es para controlar si el contenido está en la lista
 }
 
-export function ActionsButtons({ filmId, type }: Props) {
+export function ActionButtonsPage({ filmId, type }: Props) {
   const router = useRouter();
   const { toast } = useToast();
   const perfilId = usePerfilId();
 
   const [openSeleccionar, setOpenSeleccionar] = useState(false);
-  const [localInList, setLocalInList] = useState<boolean | null>(null); // 👈 Control interno
+  const [checking] = useState(false);
+  const [isInList, setIsInList] = useState(false);
 
-  const { checking, existsMap } = useCheckContenidoEnListas({
+  const { existsMap } = useCheckContenidoEnListas({
     perfilId: perfilId ?? "",
     contenidoIds: [filmId],
   });
 
-  const isInList = localInList !== null ? localInList : existsMap[filmId] || false;
+  useEffect(() => {
+    if (existsMap && filmId in existsMap) {
+      setIsInList(existsMap[filmId]);
+    }
+  }, [existsMap, filmId]);
 
-  const handlePlay = () => {
-    router.push(`/${type}/${filmId}`);
-  };
 
   const handleRemove = async () => {
     try {
@@ -52,7 +52,7 @@ export function ActionsButtons({ filmId, type }: Props) {
         description: "El contenido fue eliminado de tu lista.",
       });
 
-      setLocalInList(false); // 🔥 Actualizamos estado sin recargar
+      setIsInList(false);
     } catch (error: unknown) {
       const err = error as Error;
       console.error(error);
@@ -67,18 +67,7 @@ export function ActionsButtons({ filmId, type }: Props) {
   if (!perfilId) return null;
 
   return (
-    <div className="flex items-center gap-1 mt-2">
-      {/* Botón Play */}
-      <Button
-        size="icon"
-        variant="ghost"
-        className="bg-slate-50 rounded-full flex items-center justify-center h-7 w-7"
-        onClick={handlePlay}
-      >
-        <Play className="text-zinc-900 h-3 w-3 fill-zinc-900" />
-      </Button>
-
-      {/* Botón Añadir / Eliminar */}
+    <div className="flex items-center gap-2 mt-2">
       {checking ? (
         <Button variant="outline" size="sm" disabled>
           Cargando...
@@ -88,10 +77,10 @@ export function ActionsButtons({ filmId, type }: Props) {
           variant="outline"
           size="sm"
           onClick={handleRemove}
-          className="flex items-center gap-1 text-green-500 hover:text-black hover:bg-white bg-black"
+          className="flex items-center gap-1 text-green-500 hovr:text-black hover:bg-white bg-black"
         >
           <BookmarkCheck size={16} />
-          Ya esta en tu lista
+           Ya esta en tu lista
         </Button>
       ) : (
         <SeleccionarListaModal
@@ -103,14 +92,14 @@ export function ActionsButtons({ filmId, type }: Props) {
             <Button
               variant="outline"
               size="sm"
-              className="flex items-center gap-1 text-white bg-black"
+              className="flex items-center gap-1 text-white hover:text-black hover:bg-white bg-black rounded-full"
             >
               <BookmarkPlus size={16} />
               Añadir a la lista
             </Button>
           }
           onSuccess={() => {
-            setLocalInList(true); // 🔥 Marcamos como agregado
+            setIsInList(true);
           }}
         />
       )}

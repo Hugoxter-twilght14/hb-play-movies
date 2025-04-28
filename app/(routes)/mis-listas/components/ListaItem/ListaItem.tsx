@@ -64,7 +64,7 @@ export function ListaItem({ lista, onRefresh }: Props) {
   }
 
   return (
-    <div className="border rounded-xl p-4 relative bg-zinc-900">
+    <div className="border rounded-xl p-4 relative bg-black hover:bg-zinc-900">
       <Link href={`/mi-lista/${lista.id}`}>
         <h2 className="text-lg font-semibold text-white">{lista.nombre}</h2>
         {lista.descripcion && (
@@ -89,7 +89,7 @@ export function ListaItem({ lista, onRefresh }: Props) {
         {/* Botón para eliminar */}
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button size="icon" variant="destructive" disabled={loading}>
+            <Button size="icon" className=" bg-red-600 hover:bg-red-800 hover:text-black " variant="destructive" disabled={loading}>
               {loading ? (
                 <div className="w-4 h-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
               ) : (

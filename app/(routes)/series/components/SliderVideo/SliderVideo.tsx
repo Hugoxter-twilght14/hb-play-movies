@@ -41,13 +41,10 @@ export function SliderVideo({ series }: Props) {
         </p>
         <div className="flex gap-4">
           <Link href={`/serie/${serie.id}`}>
-            <button className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-2 rounded">
+          <button className="bg-[#00FFFF] hover:bg-emerald-600 text-black hover:text-white font-semibold px-6 py-2 rounded">
               Ver ahora
             </button>
           </Link>
-          <button className="border border-white text-white font-semibold px-6 py-2 rounded hover:bg-white hover:text-black transition">
-            Añadir a mi lista
-          </button>
         </div>
       </div>
     </div>

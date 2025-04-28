@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import { CrearListaModalSimple } from "../CrearListaModalSimple";
 import { Button } from "@/components/ui/button";
-import { Lista, ListaContenido } from "@prisma/client"; // ✅ IMPORTANTE
+import { Lista, ListaContenido } from "@prisma/client";
 import { ListaItem } from "../ListaItem";
+import {Plus } from "lucide-react"
 
 interface Props {
   perfilId: string;
@@ -42,8 +43,9 @@ export function MisListasClient({ perfilId }: Props) {
 
         <CrearListaModalSimple
           perfilId={perfilId}
-          trigger={<Button>+ Nueva Lista</Button>}
+          trigger={<Button className="bg-white hover:bg-[#00FFFF] text-black"><Plus/> Nueva Lista</Button>}
           onSuccess={fetchListas}
+          
         />
       </div>
 

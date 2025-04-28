@@ -7,7 +7,7 @@ export function TrendingMovies(props: TrendingMoviesProps) {
   const { movies } = props;
   
   return (
-    <div className="pt-11 md:pt-0 md:-top-24 lg:-top-28 relative px-[4%]">
+    <div className="pt-11 md:pt-0 md:-top-24 lg:-top-28 relative px-[4%] mb-[-120px]">
     <h3 className="text-2xl font-semibold mb-3">
         Lo más visto hoy
     </h3>
@@ -21,8 +21,8 @@ export function TrendingMovies(props: TrendingMoviesProps) {
                         <Image
                             src={`https://raw.githubusercontent.com/ratasi/images-netflix-clone/refs/heads/main/ranking/${movie.ranking}.png`} 
                             alt={`Ranking ${movie.ranking}`} 
-                            width={100} // Ajusta el tamaño según lo necesites
-                            height={150}
+                            width={200} 
+                            height={200}
                             className="h-auto w-auto"/>
                     </div>
 

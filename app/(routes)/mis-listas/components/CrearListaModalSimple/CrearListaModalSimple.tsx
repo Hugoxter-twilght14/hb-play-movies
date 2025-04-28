@@ -67,7 +67,7 @@ export function CrearListaModalSimple({
       setOpen(false)
 
       if (onSuccess) onSuccess()
-    } catch (err: unknown) {   // 👈 aquí corregimos any por unknown
+    } catch (err: unknown) {   
       const error = err as Error
       toast({
         title: "Error",
@@ -82,13 +82,13 @@ export function CrearListaModalSimple({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent>
+      <DialogContent className="bg-black">
         <DialogHeader>
           <DialogTitle>Crear nueva lista</DialogTitle>
         </DialogHeader>
         <div className="space-y-4 mt-2">
           <Input
-            placeholder="Nombre de la lista *"
+            placeholder="Nombre de la lista (Obligatorio)"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             disabled={loading}
@@ -101,7 +101,7 @@ export function CrearListaModalSimple({
           />
         </div>
         <DialogFooter className="mt-4">
-          <Button onClick={handleCrear} disabled={loading}>
+          <Button className="bg-white text-black hover:bg-[#00FFFF]" onClick={handleCrear} disabled={loading}>
             {loading ? "Creando..." : "Crear"}
           </Button>
         </DialogFooter>

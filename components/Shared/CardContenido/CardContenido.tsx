@@ -41,7 +41,7 @@ export function CardContenido({ contenidoId, tipo }: Props) {
           const json: ContenidoData = await res.json()
           setData(json)
         }
-      } catch (error: unknown) { // ✅ Tipamos correctamente
+      } catch (error: unknown) { 
         console.error("Error cargando contenido:", error)
       }
     }
@@ -94,7 +94,7 @@ export function CardContenido({ contenidoId, tipo }: Props) {
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <button
-              className="absolute top-2 right-2 bg-white/80 p-1 rounded-full hover:bg-red-500 hover:text-white transition"
+              className="absolute top-2 right-2 bg-black p-1 rounded-full hover:bg-red-500 hover:text-black transition"
               disabled={loading}
             >
               <Trash2 size={14} />

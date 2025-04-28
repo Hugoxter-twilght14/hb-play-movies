@@ -45,6 +45,7 @@ export default async function Page({ params }: { params: { serieId?: string } })
       <NavbarFilm title={serie.title} />
 
       <SerieInfo
+        id={serie.id}
         title={serie.title}
         thumbnailUrl={serie.thumbnailUrl}
         genre={serie.genre}

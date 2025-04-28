@@ -79,7 +79,6 @@ export default async function Home() {
       <SliderVideo contenido={sliderContenido} />
       <TrendingMovies movies={trendingMovies} />
 
-      {/* ✅ Sección scroll-friendly y sin conflictos de anchura */}
       <main className="w-full flex flex-col gap-2 px-[4%] mt-20">
         <ListMovies movies={movies} />
         <BlockSeries title="Series recien añadidas" series={series} />

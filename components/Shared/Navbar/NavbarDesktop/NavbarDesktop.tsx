@@ -19,7 +19,7 @@ export function NavbarDesktop(props: NavbarDesktopProps) {
       "z-30 left-0 right-0 top-0 h-16 fixed w-full transition-all duration-300",
       scrollPosition > 20 ? 'bg-black' : 'bg-transparent'
       )}>
-        <div className="px-[4%] mx-auto h-full">
+        <div className="px-[4%] mx-auto h-full bg-black">
           <div className="flex gap-4 justify-between h-full items-center">
             <div className="flex gap-2 items-center">
               <Logo/>
@@ -34,7 +34,7 @@ export function NavbarDesktop(props: NavbarDesktopProps) {
             </div>
             <div className="flex gap-4 items-center">
               <Link href="/buscador">
-                <Search className="cursor-pointer hover:text-blue-500 transition-colors" />
+                <Search className="cursor-pointer hover:text-[#00FFFF] transition-colors" />
               </Link>
               <BellRing className="cursor-pointer"/>
               <div className="flex gap-2 items-center">

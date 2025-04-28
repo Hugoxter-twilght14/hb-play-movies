@@ -8,7 +8,7 @@ export function VolverListas() {
   const router = useRouter()
 
   return (
-    <Button
+    <Button className="bg-white hover:bg-[#00FFFF] text-black mb-5"
       onClick={() => {
         router.push("/mis-listas")
         router.refresh()

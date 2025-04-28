@@ -66,6 +66,7 @@ export default async function Page({ params }: { params: { animeId?: string } })
       <NavbarAnime title={anime.title} />
 
       <AnimeInfo
+        id={anime.id}
         title={anime.title}
         thumbnailUrl={anime.thumbnailUrl}
         genre={anime.genre}

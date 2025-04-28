@@ -116,7 +116,7 @@ export function SeleccionarListaModal({
       {/* MODAL 1 - Seleccionar Lista */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild>{trigger}</DialogTrigger>
-        <DialogContent>
+        <DialogContent className="bg-black">
           <DialogHeader>
             <DialogTitle>Selecciona una lista</DialogTitle>
           </DialogHeader>
@@ -141,11 +141,11 @@ export function SeleccionarListaModal({
 
           <DialogFooter className="mt-6 flex flex-col gap-2">
             {listas.length < 5 && (
-              <Button variant="secondary" className="w-full" onClick={handleAbrirCrear}>
+              <Button variant="secondary" className="w-full bg-white hover:bg-[#00FFFF] text-black" onClick={handleAbrirCrear}>
                 Crear nueva lista
               </Button>
             )}
-            <Button variant="ghost" onClick={() => setDialogOpen(false)} className="w-full">
+            <Button variant="ghost" onClick={() => setDialogOpen(false)} className="w-full bg-white hover:bg-[#00FFFF] text-black">
               Cancelar
             </Button>
           </DialogFooter>
