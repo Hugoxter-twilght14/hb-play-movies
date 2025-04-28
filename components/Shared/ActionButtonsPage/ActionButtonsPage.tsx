@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { Play, BookmarkPlus, BookmarkCheck } from "lucide-react";
+import { BookmarkPlus, BookmarkCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -16,7 +15,6 @@ interface Props {
 }
 
 export function ActionButtonsPage({ filmId, type }: Props) {
-  const router = useRouter();
   const { toast } = useToast();
   const perfilId = usePerfilId();
 

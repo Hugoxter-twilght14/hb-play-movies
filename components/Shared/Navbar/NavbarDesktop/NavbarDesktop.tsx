@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils"
-import { BellRing, Search } from "lucide-react"
+import { Search } from "lucide-react"
 import { Logo } from "@/components/Shared/Logo"
 import { itemsNavbar } from "@/data/itemsNavbar"
 import Link from "next/link"
@@ -26,17 +26,16 @@ export function NavbarDesktop(props: NavbarDesktopProps) {
               <div className="ml-10 flex gap-4">
                 {/*Mapeo de secciones*/}
               {itemsNavbar.map((item) => (
-                <Link key={item.name} href={item.link} className="hover:text-gray-300 transition-all duration-300">
+                <Link key={item.name} href={item.link} className="hover:text-[#00FFFF] transition-all duration-300">
                   {item.name}
                 </Link>
               ))}
               </div>
             </div>
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-6 items-center">
               <Link href="/buscador">
                 <Search className="cursor-pointer hover:text-[#00FFFF] transition-colors" />
               </Link>
-              <BellRing className="cursor-pointer"/>
               <div className="flex gap-2 items-center">
                 <SelectorProfile users={users}/>
               </div>

@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/sheet"
 
 import { Logo } from "@/components/Shared/Logo";
-import { BellRing, Menu, Search } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import { itemsNavbar } from "@/data/itemsNavbar";
 import Link from "next/link";
 import { NavbarMobileProps } from "./NavbarMobile.types";
@@ -39,10 +39,8 @@ export default function NavbarMobile(props: NavbarMobileProps) {
    <div className="border-[1px] border-white/70 my-5"/>
    <div className="flex justify-between gap-6 mt-4">
    <Link href="/buscador">
-      <Search className="cursor-pointer hover:text-blue-500 transition-colors" />
+      <Search className="cursor-pointer hover:text-[#00FFFF] transition-colors" />
     </Link>
-    <BellRing className="cursor-pointer  hover:text-[#00FFFF]"/>
-    
     <SelectorProfile users={users}/>
 
    </div>
