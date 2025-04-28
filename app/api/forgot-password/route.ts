@@ -24,8 +24,12 @@ export async function POST(req: Request) {
     
     await db.user.update({
       where: { email },
-      data: { passwordResetToken: token, passwordResetExpires: new Date(Date.now() + 3600 * 1000) }, // 1 hora
+      data: {
+        passwordResetToken: token,
+        passwordResetExpires: new Date(Date.now() + 10 * 60 * 1000), // 10 minutos
+      },
     });
+    
 
     await sendResetPasswordEmail({ email, token });
 

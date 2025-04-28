@@ -10,17 +10,22 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: "Datos incompletos." }, { status: 400 });
     }
 
+    // Validar que la contraseña tenga al menos 6 caracteres
+    if (password.length < 6) {
+      return NextResponse.json({ message: "La contraseña debe tener al menos 6 caracteres." }, { status: 400 });
+    }
+
     const user = await db.user.findFirst({
       where: {
         passwordResetToken: token,
         passwordResetExpires: {
-          gt: new Date(), // todavía válido
+          gt: new Date(), // token no expirado
         },
       },
     });
 
     if (!user) {
-      return NextResponse.json({ message: "Token inválido o expirado." }, { status: 400 });
+      return NextResponse.json({ message: "El enlace de recuperación es inválido o ha expirado." }, { status: 400 });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -29,14 +34,14 @@ export async function POST(req: Request) {
       where: { id: user.id },
       data: {
         password: hashedPassword,
-        passwordResetToken: null,
-        passwordResetExpires: null,
+        passwordResetToken: null, // limpiar token
+        passwordResetExpires: null, // limpiar expiración
       },
     });
 
-    return NextResponse.json({ message: "Contraseña actualizada." });
+    return NextResponse.json({ message: "Contraseña actualizada correctamente." });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: "Error interno." }, { status: 500 });
+    console.error("[RESET_PASSWORD_ERROR]", error);
+    return NextResponse.json({ message: "Error interno del servidor." }, { status: 500 });
   }
 }

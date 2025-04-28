@@ -42,7 +42,7 @@ export async function sendResetPasswordEmail({ email, token }: Props) {
           </a>
         </div>
         <p style="font-size: 12px; color: gray; text-align: center;">Si tú no solicitaste este cambio, puedes ignorar este mensaje.</p>
-        <p style="font-size: 12px; color: gray; text-align: center;">&copy; 2025 PlayMovies. Todos los derechos reservados.</p>
+        <p style="font-size: 12px; color: gray; text-align: center;">&copy; 2025 PlayMovies | HBStudios. Todos los derechos reservados.</p>
       </div>
     `,
   });

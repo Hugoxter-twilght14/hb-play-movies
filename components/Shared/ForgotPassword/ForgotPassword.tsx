@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation"; // 👈 Importamos router
-import { toast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
+import { toast } from "@/hooks/use-toast"; // 👈 Importamos el toast
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const router = useRouter(); // 👈 Creamos instancia del router
+  const [success, setSuccess] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,16 +21,7 @@ export default function ForgotPassword() {
       const data = await res.json();
 
       if (res.ok) {
-        toast({
-          title: "¡Revisa tu correo!",
-          description: "Te enviamos un enlace para restablecer tu contraseña.",
-        });
-
-        // 🛑 Pequeño delay para que el usuario vea el toast (opcional)
-        setTimeout(() => {
-          router.push("/login"); // 🚀 Redirigir al login
-        }, 2000); // Esperamos 2 segundos
-
+        setSuccess(true); // ✅ Mostrar pantalla de éxito
       } else {
         toast({
           title: "Error",
@@ -46,6 +38,24 @@ export default function ForgotPassword() {
       });
     }
   };
+
+  if (success) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white p-6">
+        <h2 className="text-3xl font-bold mb-4 text-cyan-400">¡Enlace enviado!</h2>
+        <p className="mb-8 text-center">
+          Te hemos enviado un correo para restablecer tu contraseña.<br />
+          Revisa tu bandeja de entrada o la carpeta de spam.
+        </p>
+        <button
+          onClick={() => router.push("/login")}
+          className="bg-cyan-400 hover:bg-cyan-500 text-black font-bold py-2 px-6 rounded-md"
+        >
+          Volver al login
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 bg-black/80 rounded-lg w-full max-w-md mx-auto mt-20">
