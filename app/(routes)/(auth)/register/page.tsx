@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Terms } from "../components/Terms";
 import { RegisterForm } from "./RegisterForm";
 
 export default function page() {
@@ -15,11 +14,10 @@ export default function page() {
             <p  className="text-white opacity-70">
                 ¿Ya tienes una cuenta?
             </p>
-            <Link href="login" className="opacity-1 text-white">
+            <Link href="login" className="opacity-1 text-white hover:text-blue-500">
                 Inicia sesión aquí
             </Link>
         </div>
-        <Terms/>
     </div>
   );
 }

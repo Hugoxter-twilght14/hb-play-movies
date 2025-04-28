@@ -64,9 +64,6 @@ export function LoginForm() {
                   <FormControl>
                     <Input placeholder="Ingresa tu correo" {...field} className="h-14 text-white" />
                   </FormControl>
-                  <FormDescription>
-                    Es el correo que usaste para crear tu cuenta
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -81,7 +78,6 @@ export function LoginForm() {
                     <Input placeholder="Escribe tu contraseña" {...field} type="password" className="h-14 text-white" />
                   </FormControl>
                   <FormDescription>
-                    ES la contraseña que ingresaste al crear tu cuenta.
                     * campos obligatorios.
                   </FormDescription>
                   <FormMessage />
@@ -89,7 +85,7 @@ export function LoginForm() {
               )}
             />
             <FormError message={error}/>
-            <Button type="submit" className="w-full bg-[#00FFFF] text-black hover:text-white">
+            <Button type="submit" className="w-full bg-white text-black hover:bg-[#00FFFF] Hover:text-white">
                 Inciar Sesión
             </Button>
           </form>

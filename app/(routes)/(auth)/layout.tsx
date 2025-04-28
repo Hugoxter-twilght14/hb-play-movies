@@ -1,24 +1,30 @@
 import { Logo } from "@/components/Shared/Logo";
 
 export default function AuthLayout({
-    children,
-  }: Readonly<{
-    children: React.ReactNode;
-  }>) {
-    return (
-      <div className="h-full">
-        <div className="h-full relative">
-          <div className="bg-black h-full min-h-screen absolute w-full -z-10">
-            <div className="bg-[url('/login-hbmovies.jpg')] h-full opacity-40 bg-no-repeat bg-cover"/>
-
-          </div>
-          <div className="px-8 py-5 max-w-7xl mx-auto">
-            <Logo/>
-          </div>
-          <div className="h-full w-full max-w-md mx-auto">
-            <div className="bg-black/70 px-14 py-16">{children}</div>
-          </div>
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <div className="h-screen w-full relative overflow-hidden">
+      {/* Fondo oscuro y la imagen */}
+      <div className="absolute inset-0 -z-10">
+        <div className="h-full w-full bg-black">
+          <div className="h-full w-full bg-[url('/iconos/logo-playmovies.png')] bg-cover bg-no-repeat bg-center opacity-30" />
         </div>
       </div>
-    );
-  }
+
+      {/* Encabezado */}
+      <div className="px-8 py-5 max-w-7xl mx-auto">
+        <Logo />
+      </div>
+
+      {/* Formulario centrado */}
+      <div className="flex items-center justify-center h-[calc(100vh-100px)]">
+        <div className="bg-black px-8 py-10 rounded-lg w-full max-w-md">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}

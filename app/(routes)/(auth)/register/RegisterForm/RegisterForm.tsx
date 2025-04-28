@@ -56,11 +56,8 @@ export function RegisterForm() {
                 <FormItem>
                   <FormLabel>Email*</FormLabel>
                   <FormControl>
-                    <Input placeholder="Escribe un correo" {...field} className="h-14"/>
+                    <Input placeholder="Correo electrónico" {...field} className="h-14"/>
                   </FormControl>
-                  <FormDescription>
-                    Escribe un correo valido.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -72,11 +69,8 @@ export function RegisterForm() {
                 <FormItem>
                   <FormLabel>Contraseña*</FormLabel>
                   <FormControl>
-                    <Input placeholder="Escribe una contraseña" {...field} className="h-14"/>
+                    <Input placeholder="Escribir Contraseña" {...field} className="h-14"/>
                   </FormControl>
-                  <FormDescription>
-                    Escribe una contraseña de 6 digítos o más.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -91,14 +85,13 @@ export function RegisterForm() {
                     <Input placeholder="Repite la contraseña nuevamente" {...field} className="h-14"/>
                   </FormControl>
                   <FormDescription>
-                    Repite la contraseña otra vez.
                     * Campos obligatorios.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full bg-[#00FFFF] text-black hover:text-white">
+            <Button type="submit" className="w-full bg-white hover:bg-[#00FFFF] text-black hover:text-black">
                 Crear cuenta
             </Button>
           </form>
