@@ -64,6 +64,13 @@ const SerieInfo: React.FC<SerieInfoProps> = ({
             <p><span className="font-semibold text-white">Edad:</span> {age}+</p>
           </div>
 
+           {/* Actores */}
+           {actores && (
+            <p className="text-sm text-gray-300">
+              <span className="font-semibold text-white">Actores:</span> {actores}
+            </p>
+          )}
+
           {/* Géneros */}
           <div className="flex flex-wrap gap-2 mt-2">
             {genre.map((g, idx) => (
@@ -72,13 +79,6 @@ const SerieInfo: React.FC<SerieInfoProps> = ({
               </span>
             ))}
           </div>
-
-          {/* Actores */}
-          {actores && (
-            <p className="text-sm text-gray-300">
-              <span className="font-semibold text-white">Actores:</span> {actores}
-            </p>
-          )}
 
           {/* Sinopsis */}
           <p className="text-gray-400 text-sm leading-relaxed mt-2">

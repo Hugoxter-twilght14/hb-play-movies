@@ -37,6 +37,9 @@ export function MovieDetail({ movie }: MovieDetailProps) {
             {movie.anio && <p><span className="font-semibold text-white">Año:</span> {movie.anio}</p>}
             {movie.audio && <p><span className="font-semibold text-white">Audio:</span> {movie.audio}</p>}
             <p><span className="font-semibold text-white">Edad:</span> {movie.age}+</p>
+            {movie.actores && (
+              <p className="sm:col-span-2"><span className="font-semibold text-white">Actores:</span> {movie.actores}</p>
+            )}
           </div>
 
           {/* Géneros */}
