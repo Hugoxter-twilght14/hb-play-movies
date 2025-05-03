@@ -27,19 +27,61 @@ export async function POST(req: Request) {
 
 export async function DELETE(req: Request) {
     const user = await currentUser();
-    if(!user){
-        return new NextResponse("No tienes los permisos para realizar esta acción", {status: 401});
+  
+    if (!user) {
+      return new NextResponse("No tienes los permisos para realizar esta acción", {
+        status: 401,
+      });
     }
-    const {userIdNetflix} = await req.json();
-
-    if(!userIdNetflix){
-        return new NextResponse("Datos invalidos", {status: 400});
+  
+    const { userIdNetflix } = await req.json();
+  
+    if (!userIdNetflix) {
+      return new NextResponse("Datos inválidos", { status: 400 });
     }
-
-    const userDeleted = await db.userNetflix.delete({
-        where:{
-            id: userIdNetflix,
+  
+    try {
+      // 1. Obtener todas las listas del perfil
+      const listas = await db.lista.findMany({
+        where: {
+          perfilId: userIdNetflix,
         },
-    });
-    return NextResponse.json(userDeleted);
-}
+        select: {
+          id: true,
+        },
+      });
+  
+      const listaIds = listas.map((l) => l.id);
+  
+      // 2. Eliminar todos los contenidos de esas listas
+      await db.listaContenido.deleteMany({
+        where: {
+          listaId: {
+            in: listaIds,
+          },
+        },
+      });
+  
+      // 3. Eliminar las listas
+      await db.lista.deleteMany({
+        where: {
+          perfilId: userIdNetflix,
+        },
+      });
+  
+      // 4. Eliminar el perfil
+      const userDeleted = await db.userNetflix.delete({
+        where: {
+          id: userIdNetflix,
+        },
+      });
+  
+      return NextResponse.json(userDeleted);
+    } catch (error) {
+      console.error("Error al eliminar perfil:", error);
+      return new NextResponse("Error interno al eliminar perfil", {
+        status: 500,
+      });
+    }
+  }
+   
