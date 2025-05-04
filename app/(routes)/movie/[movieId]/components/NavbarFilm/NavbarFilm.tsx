@@ -10,7 +10,7 @@ export function NavbarFilm(props: NavbarFilmProps) {
     
   return (
     <button className="fixed flex gap-2 p-5 cursor-pointer items-center z-10 bg-zinc-900/70  mt-[30px]"
-        onClick={() => router.back()}>
+        onClick={() => router.push("/peliculas")}>
             <ArrowLeft className='w-6 h-6' />
         <p>
             Estas viendo: 
