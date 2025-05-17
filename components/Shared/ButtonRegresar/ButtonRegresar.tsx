@@ -7,7 +7,7 @@ export function ButtonRegresar() {
   return (
     <button
       onClick={() => router.back()}
-      className="mb-4 px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-md border border-zinc-600 transition"
+      className="mb-4 px-4 py-2 bg-white hover:bg-[#00FFFF] text-black rounded-md border border-zinc-600 transition"
     >
       ← Regresar
     </button>

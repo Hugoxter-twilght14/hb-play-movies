@@ -23,6 +23,6 @@ export const itemsNavbar =[
     },
     {
         name: "Acerca De",
-        link: "/acerca-de",
+        link: "/acercaDe",
     },
 ];
