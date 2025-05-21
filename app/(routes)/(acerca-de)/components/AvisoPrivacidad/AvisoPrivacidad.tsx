@@ -11,7 +11,7 @@ export default function AvisoPrivacidad() {
       </h1>
 
       <p className="text-right text-sm text-gray-300">
-        Última actualización: 12 de mayo de 2025
+        Última actualización: 20 de mayo de 2025
       </p>
 
       {/* SECCIONES DEL ACUERDO */}
@@ -100,6 +100,8 @@ export default function AvisoPrivacidad() {
           >
             https://hb-studios-official.vercel.app/
           </a>
+          <br /> <br />
+          IMPORTANTE: Al crear una cuenta aceptas los terminos y condiciones establecidos en este acuerdo de privacidad.
         </p>
       </section>
     </div>
