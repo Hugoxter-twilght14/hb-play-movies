@@ -23,7 +23,7 @@ export function MovieVideo({ servers }: MovieVideoProps) {
     activeServer.url.includes("streamtape.com/e/") ||
     activeServer.url.includes("dailymotion.com/embed") ||
     activeServer.url.includes("geo.dailymotion.com/player.html") ||
-    activeServer.url.includes("vidmoly.to/embed-") ||
+    activeServer.url.includes("mxdrop.to/e/") ||
     activeServer.url.includes("ok.ru/videoembed");
 
   return (
