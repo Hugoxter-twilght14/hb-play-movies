@@ -22,6 +22,7 @@ export function AnimeVideo({ servers = [] }: AnimeVideoProps) {
     activeServer.url.includes("streamtape.com/v/") ||
     activeServer.url.includes("dailymotion.com/embed") ||
     activeServer.url.includes("geo.dailymotion.com/player.html") ||
+    activeServer.url.includes("vidmoly.to/embed-") ||
     activeServer.url.includes("ok.ru/videoembed");
 
   return (
